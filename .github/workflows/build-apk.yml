@@ -19,14 +19,19 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Configure Android SDK & Licenses
+      run: |
+        echo "sdk.dir=$ANDROID_HOME" > android/local.properties
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+
     - name: Build Debug APK
       working-directory: ./android
       run: |
         chmod +x gradlew
-        ./gradlew assembleDebug --stacktrace
+        ./gradlew assembleDebug --no-daemon --stacktrace
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ClassesOfAcademia-OwnerApp-APK
-        path: android/app/build/outputs/apk/debug/app-debug.apk
+        path: android/app/build/outputs/apk/debug/*.apk
