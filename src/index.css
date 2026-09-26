@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+  --color-coa-navy: #0b192c;
+  --color-coa-blue: #0284c7;
+  --color-coa-blue-dark: #0369a1;
+  --color-coa-red: #dc2626;
+  --color-coa-amber: #f59e0b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
