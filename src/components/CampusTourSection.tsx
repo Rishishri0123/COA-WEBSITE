@@ -51,7 +51,7 @@ export const CampusTourSection: React.FC = () => {
             Designed for Focused, Distraction-Free Learning
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Both our Shastri Nagar (D-32) and Vivekanand Nagar campuses provide a safe, well-equipped, and disciplined academic sanctuary for your children.
+            Both our Shastri Nagar (D-Block) and Vivekanand Nagar campuses provide a safe, well-equipped, and disciplined academic sanctuary for your children.
           </p>
         </div>
 

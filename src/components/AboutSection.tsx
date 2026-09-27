@@ -21,7 +21,7 @@ export const AboutSection: React.FC = () => {
             <p className="text-slate-600 text-base leading-relaxed">
               Established with the vision of providing focused, high-standard coaching without commercial distractions,{' '}
               <strong className="text-slate-900 font-bold">Classes of Academia (COA)</strong> operates two state-of-the-art campuses in{' '}
-              <strong className="text-sky-700">SD-32 / D-32 Shastri Nagar</strong> (Main Campus) and{' '}
+              <strong className="text-sky-700">D-Block, Shastri Nagar</strong> (Main Campus) and{' '}
               <strong className="text-sky-700">Vivekanand Nagar</strong>, Ghaziabad.
             </p>
 
@@ -87,7 +87,7 @@ export const AboutSection: React.FC = () => {
                 <Building2 className="w-5 h-5 text-sky-700" />
                 <div className="text-xs text-slate-800">
                   <span className="font-bold text-sky-900">2 Convenient Campuses in Ghaziabad:</span> Main Campus at{' '}
-                  <span className="font-semibold">SD-32 Shastri Nagar</span> & Branch 2 at{' '}
+                  <span className="font-semibold">D-Block, Shastri Nagar</span> & Branch 2 at{' '}
                   <span className="font-semibold">Vivekanand Nagar</span>.
                 </div>
               </div>
@@ -125,7 +125,7 @@ export const AboutSection: React.FC = () => {
 
                   <p className="text-xs sm:text-sm text-slate-200 flex items-center">
                     <MapPin className="w-4 h-4 text-red-400 mr-1.5 shrink-0" />
-                    Head Center: D-32, Shastri Nagar | 2nd Center: Vivekanand Nagar, Ghaziabad
+                    Head Center: D-Block, Shastri Nagar | 2nd Center: Vivekanand Nagar, Ghaziabad
                   </p>
 
                   <div className="pt-1 flex flex-wrap gap-2 text-xs">

@@ -76,6 +76,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
             <a href="#subjects" className="hover:text-sky-600 transition-colors py-1 text-sky-700 font-bold">
               Subjects
             </a>
+            <a href="#batch-planner" className="hover:text-amber-600 transition-colors py-1 text-amber-600 font-bold">
+              Plan Batches
+            </a>
             <a href="#courses" className="hover:text-sky-600 transition-colors py-1">
               Courses
             </a>
@@ -173,6 +176,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
               className="p-2 rounded-lg bg-slate-50 hover:bg-sky-50 hover:text-sky-700"
             >
               About Us
+            </a>
+            <a
+              href="#batch-planner"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg bg-amber-50 text-amber-800 font-bold hover:bg-amber-100"
+            >
+              Plan Batches
             </a>
             <a
               href="#courses"

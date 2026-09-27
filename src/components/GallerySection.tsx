@@ -48,14 +48,14 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
   const galleryItems: GalleryItem[] = [
     {
       id: 'campus-facade',
-      title: 'Main Campus Building Exterior — D-32 Shastri Nagar',
+      title: 'Main Campus Building Exterior — D-Block, Shastri Nagar',
       category: 'campus',
       categoryLabel: 'Campus & Exterior',
       image: exteriorFacadeImg,
-      caption: 'Prominent educational building at D-32 Shastri Nagar featuring dedicated department signage for Science (Physics, Chemistry, Maths) and Commerce (CUET & CA Foundation).',
-      location: 'D-32, Shastri Nagar, Ghaziabad',
+      caption: 'Prominent educational building at D-Block, Shastri Nagar featuring dedicated department signage for Science (Physics, Chemistry, Maths) and Commerce (CUET & CA Foundation).',
+      location: 'D-Block, Shastri Nagar, Ghaziabad',
       highlights: [
-        'Authentic coaching building at D-32 Shastri Nagar',
+        'Authentic coaching building at D-Block, Shastri Nagar',
         'Official signage with direct teacher phone numbers',
         'Convenient parking and prime road connectivity'
       ],
@@ -68,7 +68,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
       categoryLabel: 'Campus & Exterior',
       image: campusEntranceImg,
       caption: 'Clean, well-lit reception pathway and gate featuring Classes of Academia guidance banners pointing directly to our dedicated Science and Commerce lecture halls.',
-      location: 'D-32, Shastri Nagar, Ghaziabad',
+      location: 'D-Block, Shastri Nagar, Ghaziabad',
       highlights: [
         'Authentic ground entrance gate with directional signs',
         'Clear directional arrows for Science & Commerce wings',
@@ -364,7 +364,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
               Want to see the physical classrooms and review the study notes in person?
             </h4>
             <p className="text-slate-600 text-xs sm:text-sm">
-              Parents and students are welcome during visiting hours: <strong>4:00 PM – 7:30 PM (Monday through Saturday)</strong> at D-32 Shastri Nagar or Vivekanand Nagar.
+              Parents and students are welcome during visiting hours: <strong>4:00 PM – 7:30 PM (Monday through Saturday)</strong> at D-Block, Shastri Nagar or Vivekanand Nagar.
             </p>
           </div>
           <div className="flex flex-wrap gap-2.5 shrink-0">

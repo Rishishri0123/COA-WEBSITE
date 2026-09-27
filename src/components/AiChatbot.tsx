@@ -143,7 +143,7 @@ He engineered this website to help students and parents in Ghaziabad easily disc
         fallbackText = `**Classes of Academia Campuses in Ghaziabad:**
 
 📍 **1. Shastri Nagar Campus (Main Campus):**
-- **Address:** SD-32 / D-32, Shastri Nagar, Ghaziabad, UP 201002 (Near Central Park)
+- **Address:** D-Block, Shastri Nagar, Ghaziabad, UP 201002 (Near Central Park)
 - **Visiting Hours:** 4:00 PM – 7:30 PM, Monday through Saturday
 - **Sunday Policy:** Closed on Sundays (Classes held on Sundays during exam periods)
 

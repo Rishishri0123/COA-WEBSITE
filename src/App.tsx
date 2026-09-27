@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutSection } from './components/AboutSection';
 import { SubjectWiseSection } from './components/SubjectWiseSection';
+import { BatchPlannerCalculator } from './components/BatchPlannerCalculator';
 import { CoursesSection } from './components/CoursesSection';
 import { FacultySection } from './components/FacultySection';
 import { BestCoachingSeoSection } from './components/BestCoachingSeoSection';
@@ -141,6 +142,7 @@ export default function App() {
         <Hero onSuccessSubmit={handleSuccessSubmit} />
         <AboutSection />
         <SubjectWiseSection onSelectSubjectForDemo={handleOpenDemoModal} />
+        <BatchPlannerCalculator onOpenDemoModal={handleOpenDemoModal} />
         <CoursesSection onSelectCourseForDemo={handleOpenDemoModal} />
         <FacultySection onOpenConsultationModal={handleOpenDemoModal} />
         <BestCoachingSeoSection onOpenDemoModal={() => handleOpenDemoModal()} />
