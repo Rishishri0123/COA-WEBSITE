@@ -165,9 +165,10 @@ export const FaqSection: React.FC = () => {
             <a
               href="tel:8800020688"
               className="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs transition flex items-center space-x-1.5"
+              title="Call Central Helpline"
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>Call 88000 20688</span>
+              <span>Call Helpline</span>
             </a>
             <a
               href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20have%20a%20question%20regarding%20admissions."

@@ -7,14 +7,27 @@ interface ContactSectionProps {
   prefilledCourse?: string;
 }
 
+const CUSTOM_SUBJECTS_OPTIONS = [
+  { id: 'custom-phy', subject: 'Physics', teacher: 'Mr. Arvind Kashyap' },
+  { id: 'custom-chem', subject: 'Chemistry', teacher: 'Mr. Mukesh Saraswat' },
+  { id: 'custom-math', subject: 'Mathematics', teacher: 'Mr. Shiv Shankar Sharma' },
+  { id: 'custom-comm', subject: 'Commerce & Accounts', teacher: 'Mr. Ravi Yadav' },
+  { id: 'custom-eco', subject: 'Economics & Business Studies', teacher: 'Mr. Ravi Yadav' },
+  { id: 'custom-found', subject: 'Class 9/10 Foundation (Science & Maths)', teacher: 'Faculty Team' },
+];
+
 export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit, prefilledCourse }) => {
   const [activeBranchId, setActiveBranchId] = useState<string>('shastri-nagar');
 
   // Form states
   const [studentName, setStudentName] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedBranch, setSelectedBranch] = useState('Shastri Nagar (Main Branch)');
+  const [selectedBranch, setSelectedBranch] = useState('Main Campus');
   const [targetClass, setTargetClass] = useState(prefilledCourse || 'Individual Physics (Mr. Arvind Kashyap)');
+  const [customSelectedSubjects, setCustomSelectedSubjects] = useState<string[]>([
+    'Physics - Mr. Arvind Kashyap',
+    'Mathematics - Mr. Shiv Shankar Sharma'
+  ]);
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -23,9 +36,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const finalCourse = targetClass === 'Custom Subject Combination' && customSelectedSubjects.length > 0
+      ? `Custom Combination: ${customSelectedSubjects.join(', ')}`
+      : targetClass;
     setTimeout(() => {
       setIsSubmitting(false);
-      onSuccessSubmit(studentName, targetClass, phone, selectedBranch, message || 'Submitted via Contact Page Inquiry Form');
+      onSuccessSubmit(studentName, finalCourse, phone, selectedBranch, message || 'Submitted via Contact Page Inquiry Form');
       setStudentName('');
       setPhone('');
       setMessage('');
@@ -45,7 +61,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
             Visit Our Ghaziabad Campuses or Inquire Online
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Walk into our Shastri Nagar Main Branch (D-Block, Shastri Nagar) or Vivekanand Nagar 2nd Branch to meet our faculty, collect syllabus modules, and schedule free trial sessions.
+            Walk into our Main Campus or 2nd Campus to meet our faculty, collect syllabus modules, and schedule free trial sessions. (Complete physical addresses and navigation are available in the Maps section above).
           </p>
         </div>
 
@@ -121,9 +137,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                   <div className="flex items-start">
                     <MapPin className="w-3.5 h-3.5 text-red-500 mr-2 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-bold text-slate-900">{selectedBranchData.address}</span>
-                      <div className="text-slate-500">{selectedBranchData.landmark}</div>
-                      <div className="text-slate-500">{selectedBranchData.city} – {selectedBranchData.pincode}</div>
+                      <span className="font-bold text-slate-900">{selectedBranchData.name}</span>
+                      <div className="text-slate-500">Official Campus Location in Ghaziabad</div>
+                      <a href="#google-maps-location" className="text-sky-700 hover:text-sky-900 font-bold inline-flex items-center text-[11px] mt-0.5">
+                        <MapPin className="w-3 h-3 mr-1 text-red-500" />
+                        View Exact Address & Driving Route in Maps Section Above
+                      </a>
                     </div>
                   </div>
 
@@ -167,8 +186,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                   src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                    selectedBranchData.address + ' ' + selectedBranchData.city
-                  )}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                    selectedBranchData.mapEmbedQuery || `Classes of Academia, ${selectedBranchData.name}, ${selectedBranchData.city}`
+                  )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                 />
               </div>
             </div>
@@ -190,13 +209,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block">
-                      Main Campus Hotline (All Subjects)
+                      Admissions Helpline & Counseling Desk
                     </span>
-                    <div className="text-xl sm:text-2xl font-extrabold tracking-tight text-white mt-0.5">
-                      +91 88000 20688
+                    <div className="text-lg sm:text-xl font-extrabold tracking-tight text-white mt-0.5">
+                      Direct Academic Helpline
                     </div>
                     <div className="text-[11px] text-slate-300 mt-0.5">
-                      Shastri Nagar & Vivekanand Nagar Centers
+                      Tap Call or WhatsApp below to connect with our counseling desk
                     </div>
                   </div>
 
@@ -204,10 +223,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                     <a
                       href="tel:8800020688"
                       className="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-bold text-xs flex items-center space-x-1.5 shadow-sm transition"
-                      title="Call Now"
+                      title="Call Helpline"
                     >
                       <Phone className="w-3.5 h-3.5" />
-                      <span>Call</span>
+                      <span>Call Now</span>
                     </a>
                     <a
                       href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20want%20to%20inquire%20about%20admissions%20and%20courses."
@@ -312,7 +331,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                       <option value="JEE Main & Advanced Subject Prep">JEE Main & Advanced Subject Prep</option>
                       <option value="CUET (UG) Target Subject Prep">CUET (UG) Subject Prep</option>
                       <option value="Class 9th & 10th Foundation (Science / Maths)">Class 9th & 10th Foundation</option>
-                      <option value="Custom Subject Combination">Custom Combination of Subjects</option>
+                      <option value="Custom Subject Combination">Custom Subject Combination (Choose Custom)</option>
                     </select>
                   </div>
 
@@ -325,12 +344,157 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                       onChange={(e) => setSelectedBranch(e.target.value)}
                       className="w-full px-3 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white"
                     >
-                      <option value="Shastri Nagar (Main Branch)">Shastri Nagar (D-Block)</option>
-                      <option value="Vivekanand Nagar (2nd Branch)">Vivekanand Nagar (2nd Campus)</option>
+                      <option value="Main Campus">Main Campus (Head Center)</option>
+                      <option value="2nd Campus">2nd Campus (Branch)</option>
                       <option value="Either Campus (Flexible)">Either Campus (Flexible)</option>
                     </select>
                   </div>
                 </div>
+
+                {/* Custom Subjects Selection: Dropdown + Checkboxes */}
+                {targetClass === 'Custom Subject Combination' && (
+                  <div className="p-4 bg-sky-50/90 border-2 border-sky-300 rounded-2xl space-y-3 animate-in fade-in duration-200">
+                    <div className="flex items-center justify-between pb-1.5 border-b border-sky-200">
+                      <div>
+                        <span className="text-xs font-extrabold text-sky-950 uppercase tracking-wider block">
+                          Custom Subject Selection
+                        </span>
+                        <span className="text-[11px] text-sky-700">
+                          Select from the dropdown or toggle checkboxes below
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-bold text-sky-800 bg-sky-200/80 px-2.5 py-1 rounded-full shrink-0">
+                        {customSelectedSubjects.length} Selected
+                      </span>
+                    </div>
+
+                    {/* Dropdown to select custom subject or preset combo */}
+                    <div>
+                      <label className="block text-xs font-bold text-sky-950 mb-1">
+                        Select Custom Subject from Dropdown:
+                      </label>
+                      <select
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (!val) return;
+                          if (val === 'ALL_SCIENCE') {
+                            const scienceSubs = [
+                              'Physics - Mr. Arvind Kashyap',
+                              'Chemistry - Mr. Mukesh Saraswat',
+                              'Mathematics - Mr. Shiv Shankar Sharma'
+                            ];
+                            setCustomSelectedSubjects(Array.from(new Set([...customSelectedSubjects, ...scienceSubs])));
+                          } else if (val === 'PHY_CHEM') {
+                            setCustomSelectedSubjects(Array.from(new Set([...customSelectedSubjects, 'Physics - Mr. Arvind Kashyap', 'Chemistry - Mr. Mukesh Saraswat'])));
+                          } else if (val === 'PHY_MATH') {
+                            setCustomSelectedSubjects(Array.from(new Set([...customSelectedSubjects, 'Physics - Mr. Arvind Kashyap', 'Mathematics - Mr. Shiv Shankar Sharma'])));
+                          } else if (val === 'CHEM_MATH') {
+                            setCustomSelectedSubjects(Array.from(new Set([...customSelectedSubjects, 'Chemistry - Mr. Mukesh Saraswat', 'Mathematics - Mr. Shiv Shankar Sharma'])));
+                          } else if (val === 'COMM_ECO') {
+                            setCustomSelectedSubjects(Array.from(new Set([...customSelectedSubjects, 'Commerce & Accounts - Mr. Ravi Yadav', 'Economics & Business Studies - Mr. Ravi Yadav'])));
+                          } else if (val === 'CLEAR_ALL') {
+                            setCustomSelectedSubjects([]);
+                          } else {
+                            if (!customSelectedSubjects.includes(val)) {
+                              setCustomSelectedSubjects(prev => [...prev, val]);
+                            }
+                          }
+                          e.target.value = '';
+                        }}
+                        defaultValue=""
+                        className="w-full px-3 py-2.5 rounded-xl border border-sky-300 text-xs sm:text-sm font-medium focus:ring-2 focus:ring-sky-500 focus:outline-none bg-white text-slate-800"
+                      >
+                        <option value="" disabled>-- Click Dropdown to Select a Custom Subject --</option>
+                        <optgroup label="Select Individual Subject">
+                          {CUSTOM_SUBJECTS_OPTIONS.map((item) => (
+                            <option key={item.id} value={`${item.subject} - ${item.teacher}`}>
+                              + Add {item.subject} ({item.teacher})
+                            </option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Popular Custom Subject Combos">
+                          <option value="ALL_SCIENCE">+ Add All 3 (Physics + Chemistry + Mathematics)</option>
+                          <option value="PHY_CHEM">+ Add Combo: Physics + Chemistry</option>
+                          <option value="PHY_MATH">+ Add Combo: Physics + Mathematics</option>
+                          <option value="CHEM_MATH">+ Add Combo: Chemistry + Mathematics</option>
+                          <option value="COMM_ECO">+ Add Combo: Commerce, Accounts & Economics</option>
+                        </optgroup>
+                        {customSelectedSubjects.length > 0 && (
+                          <optgroup label="Manage Selection">
+                            <option value="CLEAR_ALL">✕ Clear All Selected Subjects</option>
+                          </optgroup>
+                        )}
+                      </select>
+                    </div>
+
+                    {/* Selected subjects tags */}
+                    {customSelectedSubjects.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {customSelectedSubjects.map((sub, i) => (
+                          <span
+                            key={i}
+                            className="inline-flex items-center text-xs font-semibold bg-white border border-sky-300 text-sky-900 px-2.5 py-1 rounded-lg shadow-2xs"
+                          >
+                            <span>{sub}</span>
+                            <button
+                              type="button"
+                              onClick={() => setCustomSelectedSubjects(prev => prev.filter(s => s !== sub))}
+                              className="ml-1.5 text-sky-500 hover:text-red-600 font-bold cursor-pointer"
+                              title="Remove"
+                            >
+                              ✕
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Checkboxes List: "Checkbox - Subject Name - Teacher's Name" */}
+                    <div className="pt-1">
+                      <span className="text-[11px] font-bold text-slate-700 block mb-1.5">
+                        Or toggle via Subject Checkboxes:
+                      </span>
+                      <div className="grid sm:grid-cols-2 gap-2">
+                        {CUSTOM_SUBJECTS_OPTIONS.map((item) => {
+                          const itemString = `${item.subject} - ${item.teacher}`;
+                          const isChecked = customSelectedSubjects.includes(itemString);
+                          return (
+                            <label
+                              key={item.id}
+                              className={`flex items-start space-x-2.5 p-2.5 rounded-xl border text-xs cursor-pointer transition select-none ${
+                                isChecked
+                                  ? 'bg-white border-sky-500 text-sky-950 shadow-xs ring-1 ring-sky-400 font-semibold'
+                                  : 'bg-white/80 border-slate-200 text-slate-700 hover:bg-white'
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={isChecked}
+                                onChange={() => {
+                                  if (isChecked) {
+                                    setCustomSelectedSubjects((prev) => prev.filter((s) => s !== itemString));
+                                  } else {
+                                    setCustomSelectedSubjects((prev) => [...prev, itemString]);
+                                  }
+                                }}
+                                className="w-4 h-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 mt-0.5 cursor-pointer"
+                              />
+                              <span className="text-slate-800 leading-tight">
+                                Checkbox - {item.subject} - {item.teacher}
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {customSelectedSubjects.length === 0 && (
+                      <p className="text-[11px] text-amber-800 bg-amber-100/70 p-2 rounded-lg font-medium border border-amber-300">
+                        Please select at least one subject using the dropdown or checkboxes above.
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -358,14 +522,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
 
                   <a
                     href={`https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20am%20inquiring%20about%20admissions%20for%20${encodeURIComponent(
-                      targetClass
+                      targetClass === 'Custom Subject Combination' ? customSelectedSubjects.join(', ') : targetClass
                     )}%20at%20${encodeURIComponent(selectedBranch)}.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 transition"
                   >
                     <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span>Inquire Instantly via Helpline WhatsApp (+91 88000 20688)</span>
+                    <span>Inquire Instantly via Helpline WhatsApp</span>
                   </a>
                 </div>
 

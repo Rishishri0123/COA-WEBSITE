@@ -117,9 +117,10 @@ export const StudentProgressSection: React.FC<StudentProgressSectionProps> = ({ 
               <a
                 href="tel:8800020688"
                 className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition flex items-center justify-center space-x-2 shadow-md"
+                title="Call Admissions Desk"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>Call Admissions: 88000 20688</span>
+                <span>Call Admissions</span>
               </a>
 
               {onOpenDemoModal && (

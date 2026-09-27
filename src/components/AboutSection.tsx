@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle, Award, Users, BookOpen, Clock, MapPin, Sparkles, Building2 } from 'lucide-react';
-import campusExteriorImg from '../assets/images/coa_campus_exterior_1789837482918.jpg';
+import campusExteriorImg from '../assets/images/coa_exterior_facade_1790498642822.jpg';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -20,9 +20,9 @@ export const AboutSection: React.FC = () => {
 
             <p className="text-slate-600 text-base leading-relaxed">
               Established with the vision of providing focused, high-standard coaching without commercial distractions,{' '}
-              <strong className="text-slate-900 font-bold">Classes of Academia (COA)</strong> operates two state-of-the-art campuses in{' '}
-              <strong className="text-sky-700">D-Block, Shastri Nagar</strong> (Main Campus) and{' '}
-              <strong className="text-sky-700">Vivekanand Nagar</strong>, Ghaziabad.
+              <strong className="text-slate-900 font-bold">Classes of Academia (COA)</strong> operates two state-of-the-art campuses across{' '}
+              <strong className="text-sky-700">Main Campus</strong> and{' '}
+              <strong className="text-sky-700">2nd Campus</strong> in Ghaziabad (locations detailed in Maps section).
             </p>
 
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
@@ -86,9 +86,7 @@ export const AboutSection: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <Building2 className="w-5 h-5 text-sky-700" />
                 <div className="text-xs text-slate-800">
-                  <span className="font-bold text-sky-900">2 Convenient Campuses in Ghaziabad:</span> Main Campus at{' '}
-                  <span className="font-semibold">D-Block, Shastri Nagar</span> & Branch 2 at{' '}
-                  <span className="font-semibold">Vivekanand Nagar</span>.
+                  <span className="font-bold text-sky-900">2 Convenient Campuses in Ghaziabad:</span> Main Campus & Branch 2 Campus (Full addresses in Maps section).
                 </div>
               </div>
             </div>
@@ -125,7 +123,7 @@ export const AboutSection: React.FC = () => {
 
                   <p className="text-xs sm:text-sm text-slate-200 flex items-center">
                     <MapPin className="w-4 h-4 text-red-400 mr-1.5 shrink-0" />
-                    Head Center: D-Block, Shastri Nagar | 2nd Center: Vivekanand Nagar, Ghaziabad
+                    Visit Maps Section Below for Exact Addresses & Driving Routes
                   </p>
 
                   <div className="pt-1 flex flex-wrap gap-2 text-xs">
@@ -149,7 +147,7 @@ export const AboutSection: React.FC = () => {
                 </div>
                 <div>
                   <div className="font-heading font-bold text-slate-900 text-sm">Top Rated in Ghaziabad</div>
-                  <div className="text-xs text-slate-500">Trusted by 1000+ parents across Shastri Nagar</div>
+                  <div className="text-xs text-slate-500">Trusted by 1000+ parents across Ghaziabad</div>
                 </div>
               </div>
             </div>

@@ -94,22 +94,23 @@ export const WhyUsSection: React.FC = () => {
               Ready to witness the difference in your child's academic confidence?
             </h4>
             <p className="text-slate-400 text-xs sm:text-sm">
-              Attend 2 days of free trial classes at either our Shastri Nagar or Vivekanand Nagar campus with zero obligation.
+              Attend 2 days of free trial classes at our campus centers (locations detailed in Maps section) with zero obligation.
             </p>
           </div>
           <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-2.5">
             <a
               href="tel:8800020688"
               className="py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center space-x-2 transition shadow-lg"
+              title="Call Central Helpline"
             >
               <PhoneCall className="w-4 h-4" />
-              <span>Call Director: 88000 20688</span>
+              <span>Call Helpline</span>
             </a>
             <a
               href="#contact"
               className="py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center justify-center transition border border-white/20"
             >
-              <span>Visit Centers & Timings</span>
+              <span>Visit Campus & Timings</span>
             </a>
           </div>
         </div>

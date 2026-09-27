@@ -14,16 +14,18 @@ import {
   Clock, 
   CheckCircle2, 
   Layers, 
-  Maximize2 
+  Maximize2,
+  MessageCircle 
 } from 'lucide-react';
 
-// Enhanced and curated authentic images
-import exteriorFacadeImg from '../assets/images/coa_building_original_1790049920564.jpg';
-import campusEntranceImg from '../assets/images/coa_entrance_original_1790049940418.jpg';
-import classroomImg from '../assets/images/coa_modern_classroom_1789837499314.jpg';
-import facultyTeachingImg from '../assets/images/coa_faculty_teaching_1790049262172.jpg';
-import notesCompendiumImg from '../assets/images/coa_notes_compendium_1790049235788.jpg';
-import toppersImg from '../assets/images/coa_student_toppers_1789837518364.jpg';
+// Enhanced authentic coaching images with Classes of Academia branding
+import exteriorFacadeImg from '../assets/images/coa_campus_front_view_1790500204207.jpg';
+import campusEntranceImg from '../assets/images/coa_reading_hall_1790500293766.jpg';
+import classroomImg from '../assets/images/coa_smart_lecture_hall_1790500219691.jpg';
+import facultyTeachingImg from '../assets/images/coa_faculty_in_action_1790500235369.jpg';
+import notesCompendiumImg from '../assets/images/coa_study_compendium_1790500249177.jpg';
+import toppersImg from '../assets/images/coa_achievers_award_1790500264813.jpg';
+import doubtMentorshipImg from '../assets/images/coa_doubt_solving_1790500279299.jpg';
 
 interface GalleryItem {
   id: string;
@@ -48,46 +50,46 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
   const galleryItems: GalleryItem[] = [
     {
       id: 'campus-facade',
-      title: 'Main Campus Building Exterior — D-Block, Shastri Nagar',
+      title: 'Main Campus Building Exterior & Entrance',
       category: 'campus',
       categoryLabel: 'Campus & Exterior',
       image: exteriorFacadeImg,
-      caption: 'Prominent educational building at D-Block, Shastri Nagar featuring dedicated department signage for Science (Physics, Chemistry, Maths) and Commerce (CUET & CA Foundation).',
-      location: 'D-Block, Shastri Nagar, Ghaziabad',
+      caption: 'Official multi-story Classes of Academia coaching center in Ghaziabad featuring bright institutional signage, secure entrance, and dedicated Science & Commerce learning wings.',
+      location: 'Main Campus Center (View full address in Maps section)',
       highlights: [
-        'Authentic coaching building at D-Block, Shastri Nagar',
-        'Official signage with direct teacher phone numbers',
+        'Official Classes of Academia institution building',
+        'Distinct signage with zero third-party distractions',
         'Convenient parking and prime road connectivity'
       ],
       isEnhanced: true
     },
     {
-      id: 'campus-entrance',
-      title: 'Welcoming Ground-Floor Entrance & Wayfinding Signage',
+      id: 'self-study-hall',
+      title: 'Self-Study Library & Quiet Reading Hall',
       category: 'campus',
-      categoryLabel: 'Campus & Exterior',
+      categoryLabel: 'Library & Reading Hall',
       image: campusEntranceImg,
-      caption: 'Clean, well-lit reception pathway and gate featuring Classes of Academia guidance banners pointing directly to our dedicated Science and Commerce lecture halls.',
-      location: 'D-Block, Shastri Nagar, Ghaziabad',
+      caption: 'Peaceful, air-conditioned self-study reading hall and reference library where students sit at individual study desks with reference books, formula compendiums, and notes.',
+      location: 'Campus Academic Wing',
       highlights: [
-        'Authentic ground entrance gate with directional signs',
-        'Clear directional arrows for Science & Commerce wings',
-        'Secure and welcoming campus atmosphere'
+        'Quiet, distraction-free individual study environment',
+        'Open during visiting hours (4:00 PM – 7:30 PM, Mon–Sat)',
+        'Reference book bank for CBSE, JEE, CUET & CA Foundation'
       ],
       isEnhanced: true
     },
     {
       id: 'curated-notes',
-      title: 'Best Master Notes Throughout Books with Practice Questions',
+      title: 'Master Study Compendium & Practice Question Sets',
       category: 'notes',
       categoryLabel: 'Curated Multi-Book Notes',
       image: notesCompendiumImg,
-      caption: 'We offer the best curated notes compiled throughout leading reference books (NCERT, HC Verma, SL Arora, OP Tandon, RD Sharma, TS Grewal) with comprehensive practice questions, formula sheets, and step-by-step solutions.',
-      location: 'Available across all batches at Shastri & Vivekanand Nagar',
+      caption: 'Official Classes of Academia master practice compendiums synthesized throughout 5+ leading reference books with 15+ years solved papers, derivations, and question banks.',
+      location: 'Available across all individual subject batches',
       highlights: [
-        'Best notes compiled throughout leading reference books',
-        'Comprehensive practice questions with 15+ years solved papers',
-        'Step-by-step derivations, shortcuts & chapter formula booklets'
+        'Official Classes of Academia curated modules',
+        'Comprehensive practice questions with chapter formula banks',
+        'No heavy commercial guidebooks required'
       ]
     },
     {
@@ -96,8 +98,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
       category: 'classroom',
       categoryLabel: 'Classrooms & Labs',
       image: classroomImg,
-      caption: 'Focused learning atmosphere with comfortable individual desk spacing, glare-free presentation boards, and dual split ACs for prolonged academic stamina.',
-      location: 'Shastri Nagar & Vivekanand Nagar Centers',
+      caption: 'Focused learning atmosphere with comfortable individual desk spacing, glare-free presentation boards with Classes of Academia branding, and dual split ACs.',
+      location: 'Campus Academic Wings',
       highlights: [
         'Strict batch caps (15–25 students) for individual focus',
         'Crystal-clear whiteboard and audio acoustics',
@@ -106,11 +108,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
     },
     {
       id: 'faculty-mentorship',
-      title: 'Senior Faculty Teaching & Conceptual Problem Solving',
+      title: 'Senior Faculty Teaching Live & Board Concept Derivation',
       category: 'faculty',
       categoryLabel: 'Faculty Mentorship',
       image: facultyTeachingImg,
-      caption: 'Live classroom instruction by our senior HODs (15+ years experience) deconstructing complex Physics formulas, Organic mechanisms, and Calculus theorems.',
+      caption: 'Live classroom instruction by senior HODs (15+ years experience) deconstructing complex physics derivations, math calculus problems, and chemistry reaction mechanisms.',
       location: 'Senior Secondary Lecture Halls',
       highlights: [
         'HODs teach every lecture personally — no junior proxies',
@@ -120,11 +122,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
     },
     {
       id: 'student-toppers',
-      title: 'Student Achievers & High-Performance Culture',
+      title: 'Academic Achievers & Board Toppers Felicitation Ceremony',
       category: 'students',
       categoryLabel: 'Students & Achievers',
       image: toppersImg,
-      caption: 'Celebrating our top scorers in CBSE 12th Boards (98.2%), JEE Main (99.1 Percentile), and first-attempt CA Foundation clears from Ghaziabad.',
+      caption: 'Celebrating our top scorers in CBSE 12th Boards (98.2%), JEE Main (99.1 Percentile), and CA Foundation at our annual academic honors and felicitation stage.',
       location: 'Annual Academic Honors & Mentorship Sessions',
       highlights: [
         '2–3 Monthly progress tests keep students at peak readiness',
@@ -134,16 +136,16 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
     },
     {
       id: 'doubt-cubicle',
-      title: 'Dedicated 1-on-1 Doubt Resolution Desk',
+      title: 'Dedicated 1-on-1 Faculty Mentorship & Doubt Solving Desk',
       category: 'faculty',
       categoryLabel: 'Faculty Mentorship',
-      image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1200&q=80',
-      caption: 'Personal consultation desks where students sit side-by-side with subject teachers to resolve tough questions, review homework, and analyze monthly progress test papers.',
-      location: 'Both Shastri Nagar & Vivekanand Nagar Centers',
+      image: doubtMentorshipImg,
+      caption: 'Personal consultation desks where students sit side-by-side with subject teachers to resolve tough questions, review monthly test results, and clear doubts.',
+      location: 'Faculty Consultation Cell',
       highlights: [
         'Open daily during visiting hours (4:00 PM – 7:30 PM)',
         'Zero hesitation policy — every doubt is treated with patience',
-        'Tailored guidance on time management and speed'
+        'Tailored guidance on speed, accuracy, and presentation'
       ]
     }
   ];
@@ -241,9 +243,25 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
                     <Sparkles className="w-4 h-4 text-purple-600 shrink-0" />
                     <span><strong>Monthly Tests:</strong> 2–3 Progress tests every month</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span><strong>Helpline:</strong> +91 88000 20688</span>
+                  <div className="flex items-center space-x-2 pt-1">
+                    <a
+                      href="tel:8800020688"
+                      className="px-2 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-[11px] font-bold inline-flex items-center space-x-1"
+                      title="Call Helpline"
+                    >
+                      <Phone className="w-3 h-3 text-sky-600" />
+                      <span>Call Helpline</span>
+                    </a>
+                    <a
+                      href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20would%20like%20to%20inquire%20about%20admissions."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-bold inline-flex items-center space-x-1"
+                      title="WhatsApp Helpline"
+                    >
+                      <MessageCircle className="w-3 h-3 text-emerald-600" />
+                      <span>WhatsApp</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -364,7 +382,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onOpenDemoModal 
               Want to see the physical classrooms and review the study notes in person?
             </h4>
             <p className="text-slate-600 text-xs sm:text-sm">
-              Parents and students are welcome during visiting hours: <strong>4:00 PM – 7:30 PM (Monday through Saturday)</strong> at D-Block, Shastri Nagar or Vivekanand Nagar.
+              Parents and students are welcome during visiting hours: <strong>4:00 PM – 7:30 PM (Monday through Saturday)</strong> at our campus centers (locations in Maps section).
             </p>
           </div>
           <div className="flex flex-wrap gap-2.5 shrink-0">

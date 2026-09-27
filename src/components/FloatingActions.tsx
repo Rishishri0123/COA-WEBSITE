@@ -45,7 +45,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = () => {
       {/* 2. Floating Call Button (Top Icon - Blue circle with white border & shadow matching reference) */}
       <a
         href={`tel:${MAIN_HELPLINE.raw}`}
-        title="Call Helpline: 88000 20688"
+        title="Call Admissions Helpline"
         id="floating-call-btn"
         aria-label="Call Admissions Helpline"
         className="pointer-events-auto relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#0284c7] hover:bg-[#0369a1] active:scale-90 text-white shadow-lg shadow-sky-600/35 border-2 border-white transition-all transform hover:scale-105 group"
@@ -53,7 +53,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = () => {
         <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-white stroke-[2.2]" />
         {/* Tooltip for desktop hover */}
         <span className="absolute right-full mr-3 px-2.5 py-1 rounded-lg bg-slate-900 text-white text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md hidden sm:block">
-          Call 88000 20688
+          Call Helpline
         </span>
       </a>
 
@@ -62,7 +62,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = () => {
         href={MAIN_HELPLINE.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        title="Chat on WhatsApp: 88000 20688"
+        title="Chat on WhatsApp"
         id="floating-whatsapp-btn"
         aria-label="Chat on WhatsApp"
         className="pointer-events-auto relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#25D366] hover:bg-[#20ba5a] active:scale-90 text-white shadow-lg shadow-emerald-600/35 border-2 border-white transition-all transform hover:scale-105 group"

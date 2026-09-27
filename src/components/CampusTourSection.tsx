@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Camera, MapPin, Eye, CheckCircle2, BookOpen, Lightbulb, Users, Shield } from 'lucide-react';
-import classroomImg from '../assets/images/coa_modern_classroom_1789837499314.jpg';
-import exteriorImg from '../assets/images/coa_building_original_1790049920564.jpg';
-import notesCompendiumImg from '../assets/images/coa_notes_compendium_1790049235788.jpg';
+import classroomImg from '../assets/images/coa_modern_classroom_1790498669368.jpg';
+import exteriorImg from '../assets/images/coa_exterior_facade_1790498642822.jpg';
+import notesCompendiumImg from '../assets/images/coa_curated_notes_1790498694325.jpg';
+import doubtMentorshipImg from '../assets/images/coa_doubt_mentorship_1790498721215.jpg';
+import entranceImg from '../assets/images/coa_entrance_hall_1790498655120.jpg';
 
 export const CampusTourSection: React.FC = () => {
   const [activeFacility, setActiveFacility] = useState<number>(0);
@@ -19,7 +21,7 @@ export const CampusTourSection: React.FC = () => {
       title: 'Doubt Resolution & Mentoring Desk',
       tag: 'Personalized Focus',
       desc: 'Dedicated daily 1-on-1 discussion cubicles where students clarify doubts from homework, school tests, or entrance test papers.',
-      image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=800&q=80',
+      image: doubtMentorshipImg,
       features: ['Direct access to subject teachers', 'No question is too basic', 'Daily evening slots']
     },
     {
@@ -30,10 +32,10 @@ export const CampusTourSection: React.FC = () => {
       features: ['Curated from NCERT, HC Verma, SL Arora, RD Sharma, TS Grewal', 'Chapter-wise formula sheets & shortcut modules', 'Extensive practice questions with 15+ years solved question banks']
     },
     {
-      title: 'Parent-Teacher Academic Counseling & Evaluation Desk',
+      title: 'Parent-Teacher Academic Counseling & Campus Entrance',
       tag: 'Progress Tracking',
       desc: 'Dedicated consultation area where our faculty shares detailed 2–3 monthly progress test reports, attendance logs, and personalized improvement roadmaps.',
-      image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
+      image: entranceImg,
       features: ['Monthly progress test report cards', 'Personalized academic counseling', 'Open during visiting hours (4:00 PM – 7:30 PM)']
     }
   ];
@@ -51,7 +53,7 @@ export const CampusTourSection: React.FC = () => {
             Designed for Focused, Distraction-Free Learning
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Both our Shastri Nagar (D-Block) and Vivekanand Nagar campuses provide a safe, well-equipped, and disciplined academic sanctuary for your children.
+            Both our Main and Branch campuses provide a safe, well-equipped, and disciplined academic sanctuary for your children (Full locations detailed in Maps section).
           </p>
         </div>
 

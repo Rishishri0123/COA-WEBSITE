@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BRANCHES_DATA } from '../data/coachingData';
-import { MapPin, Navigation, ExternalLink, Phone, Clock, Train, Compass, Copy, Check, Car, Building2, Sparkles } from 'lucide-react';
+import { MapPin, Navigation, ExternalLink, Phone, MessageCircle, Clock, Train, Compass, Copy, Check, Car, Building2, Sparkles } from 'lucide-react';
 
 export const GoogleMapsSection: React.FC = () => {
   const [selectedBranchId, setSelectedBranchId] = useState<string>('shastri-nagar');
@@ -148,10 +148,50 @@ export const GoogleMapsSection: React.FC = () => {
                 className="w-full h-full"
               />
 
-              {/* Float badge over map */}
-              <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-2 rounded-xl shadow-md border border-slate-200/80 flex items-center space-x-2 text-xs">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                <span className="font-bold text-slate-800">{currentBranch.name}</span>
+              {/* Floating Verified Coaching Card over map */}
+              <div className="absolute top-3 left-3 right-3 sm:right-auto sm:max-w-sm bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-slate-200/90 flex flex-col space-y-1.5 text-xs z-10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-extrabold text-slate-900 tracking-tight text-xs sm:text-sm">
+                      Classes of Academia
+                    </span>
+                  </div>
+                  <span className="bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    Coaching Institute
+                  </span>
+                </div>
+                <div className="flex items-center space-x-2 text-[11px] text-slate-600">
+                  <span className="text-amber-500 font-bold flex items-center">
+                    ★ 4.9
+                  </span>
+                  <span>(120+ Student Reviews)</span>
+                  <span>•</span>
+                  <span className="font-semibold text-slate-800">{currentBranch.type}</span>
+                </div>
+                <p className="text-[11px] text-slate-500 line-clamp-1">
+                  {currentBranch.address}, {currentBranch.city}
+                </p>
+                <div className="flex items-center space-x-2 pt-1">
+                  <a
+                    href={currentBranch.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-[11px] font-bold text-white bg-sky-600 hover:bg-sky-700 px-2.5 py-1 rounded-lg shadow-xs transition"
+                  >
+                    <Navigation className="w-3 h-3 mr-1" />
+                    Directions
+                  </a>
+                  <a
+                    href={currentBranch.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-[11px] font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-lg border border-slate-200 transition"
+                  >
+                    <span>Open in Maps</span>
+                    <ExternalLink className="w-2.5 h-2.5 ml-1" />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -290,7 +330,26 @@ export const GoogleMapsSection: React.FC = () => {
               </div>
 
               <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500">Contact: {branch.primaryPhone}</span>
+                <div className="flex items-center space-x-1.5">
+                  <a
+                    href={`tel:${branch.primaryPhone.replace(/[^0-9]/g, '')}`}
+                    className="p-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold transition flex items-center space-x-1"
+                    title="Call Campus Helpline"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-sky-600" />
+                    <span className="text-[11px]">Call</span>
+                  </a>
+                  <a
+                    href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20would%20like%20to%20inquire%20about%20admissions."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold transition flex items-center space-x-1"
+                    title="WhatsApp Campus"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-[11px]">WhatsApp</span>
+                  </a>
+                </div>
                 <a
                   href={branch.directionsUrl}
                   target="_blank"

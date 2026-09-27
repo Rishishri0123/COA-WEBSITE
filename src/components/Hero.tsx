@@ -22,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [grade, setGrade] = useState('11th-12th-Science');
-  const [branch, setBranch] = useState('D-Block, Shastri Nagar');
+  const [branch, setBranch] = useState('Main Campus');
   const [activeSubjectTab, setActiveSubjectTab] = useState<'physics' | 'chemistry' | 'maths' | 'commerce'>('physics');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -105,20 +105,33 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
               Visiting Hours: <strong className="text-emerald-400">4:00 PM – 7:30 PM (Mon–Sat)</strong>
             </span>
             <span className="text-slate-500 hidden sm:inline">·</span>
-            <span className="text-slate-400 hidden sm:inline">
-              Main Campus: <strong className="text-slate-300">D-Block, Shastri Nagar</strong> & Vivekanand Nagar
-            </span>
+            <a href="#google-maps-location" className="text-slate-300 hover:text-amber-300 transition hidden sm:inline">
+              Campuses: <strong className="text-slate-200 underline">Main & 2nd Campus</strong> (View in Maps)
+            </a>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <span className="text-slate-400 hidden md:inline">2–3 Monthly Progress Tests with Parents Reporting</span>
-            <a 
-              href="tel:8800020688" 
-              className="text-amber-400 hover:text-amber-300 font-bold flex items-center transition"
-            >
-              <Phone className="w-3.5 h-3.5 mr-1" />
-              88000 20688
-            </a>
+            <div className="flex items-center space-x-2">
+              <a
+                href="tel:8800020688"
+                className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sky-300 font-bold text-xs flex items-center space-x-1 transition"
+                title="Call Central Helpline"
+              >
+                <Phone className="w-3.5 h-3.5 text-sky-400" />
+                <span>Call</span>
+              </a>
+              <a
+                href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20would%20like%20to%20inquire%20about%20admissions."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center space-x-1 transition"
+                title="Chat on WhatsApp"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                <span>WhatsApp</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -142,8 +155,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
 
             {/* Sub-copy */}
             <p className="text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Ghaziabad’s most disciplined learning center at <strong className="text-white">D-Block, Shastri Nagar</strong> and{' '}
-              <strong className="text-white">Vivekanand Nagar</strong>. We offer focused{' '}
+              Ghaziabad’s most disciplined learning center across our <strong className="text-white">Main & Branch Campuses</strong>. We offer focused{' '}
               <strong className="text-amber-300 font-semibold">individual subject classes</strong> for{' '}
               <strong className="text-sky-300 font-semibold">Physics, Chemistry, Mathematics</strong> and{' '}
               <strong className="text-rose-300 font-semibold">Commerce (IX-XII, JEE & CA Foundation)</strong>.
@@ -222,9 +234,10 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
               <a
                 href="tel:8800020688"
                 className="px-6 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-lg shadow-sky-950 flex items-center justify-center space-x-2 transition transform hover:-translate-y-0.5"
+                title="Call Admissions Desk"
               >
                 <Phone className="w-4 h-4 text-white" />
-                <span>Call Admissions: 88000 20688</span>
+                <span>Call Admissions</span>
               </a>
 
               <a
@@ -337,8 +350,8 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                         onChange={(e) => setBranch(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white"
                       >
-                        <option value="D-Block, Shastri Nagar">D-Block, Shastri Nagar (Main)</option>
-                        <option value="Vivekanand Nagar">Vivekanand Nagar (2nd Branch)</option>
+                        <option value="Main Campus">Main Campus</option>
+                        <option value="2nd Campus">2nd Campus</option>
                       </select>
                     </div>
                   </div>

@@ -97,7 +97,7 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
   const selectedSubjectObjects = currentSubjects.filter(s => selectedSubjects.includes(s.id));
   const totalWeeklyHours = selectedSubjectObjects.reduce((acc, curr) => acc + curr.hoursPerWeek, 0);
 
-  const selectedSummaryString = `${gradeOptions.find(g => g.id === selectedGrade)?.label}: ${selectedSubjectObjects.map(s => s.name).join(', ')} (${preferredCampus === 'shastri' ? 'D-Block, Shastri Nagar' : 'Vivekanand Nagar'})`;
+  const selectedSummaryString = `${gradeOptions.find(g => g.id === selectedGrade)?.label}: ${selectedSubjectObjects.map(s => s.name).join(', ')} (${preferredCampus === 'shastri' ? 'Main Campus' : '2nd Campus'})`;
 
   return (
     <section id="batch-planner" className="py-16 sm:py-20 bg-slate-900 text-white relative overflow-hidden">
@@ -225,10 +225,10 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
                 >
                   <div className="flex items-center space-x-2">
                     <Building2 className="w-4 h-4 text-sky-400 shrink-0" />
-                    <span className="font-bold text-xs sm:text-sm text-white">D-Block, Shastri Nagar</span>
+                    <span className="font-bold text-xs sm:text-sm text-white">Main Campus</span>
                   </div>
                   <p className="text-[11px] text-slate-400 mt-1">
-                    Main Campus • Near Central Park • Visiting: 4:00 PM – 7:30 PM
+                    Head Center • Visiting: 4:00 PM – 7:30 PM • View address in Maps
                   </p>
                 </button>
 
@@ -243,10 +243,10 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
                 >
                   <div className="flex items-center space-x-2">
                     <Building2 className="w-4 h-4 text-amber-400 shrink-0" />
-                    <span className="font-bold text-xs sm:text-sm text-white">Vivekanand Nagar</span>
+                    <span className="font-bold text-xs sm:text-sm text-white">2nd Campus</span>
                   </div>
                   <p className="text-[11px] text-slate-400 mt-1">
-                    2nd Campus • Near Nehru Stadium • Visiting: 4:00 PM – 7:30 PM
+                    Branch Campus • Visiting: 4:00 PM – 7:30 PM • View address in Maps
                   </p>
                 </button>
               </div>
@@ -311,7 +311,7 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
                     <Building2 className="w-3.5 h-3.5 mr-2 text-rose-400" />
                     Campus Location
                   </span>
-                  <span className="font-bold text-white">{preferredCampus === 'shastri' ? 'D-Block, Shastri Nagar' : 'Vivekanand Nagar'}</span>
+                  <span className="font-bold text-white">{preferredCampus === 'shastri' ? 'Main Campus' : '2nd Campus'}</span>
                 </div>
 
                 <div className="flex items-center justify-between">

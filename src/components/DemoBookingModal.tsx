@@ -18,7 +18,11 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [course, setCourse] = useState(defaultCourse || 'Individual Physics (Mr. Arvind Kashyap)');
-  const [branch, setBranch] = useState('Shastri Nagar (D-Block)');
+  const [customSubjects, setCustomSubjects] = useState<string[]>([
+    'Physics - Mr. Arvind Kashyap',
+    'Mathematics - Mr. Shiv Shankar Sharma'
+  ]);
+  const [branch, setBranch] = useState('Main Campus');
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,12 +34,24 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
 
   if (!isOpen) return null;
 
+  const CUSTOM_SUBJECTS_LIST = [
+    { id: 'm-phy', subject: 'Physics', teacher: 'Mr. Arvind Kashyap' },
+    { id: 'm-chem', subject: 'Chemistry', teacher: 'Mr. Mukesh Saraswat' },
+    { id: 'm-math', subject: 'Mathematics', teacher: 'Mr. Shiv Shankar Sharma' },
+    { id: 'm-comm', subject: 'Commerce & Accounts', teacher: 'Mr. Ravi Yadav' },
+    { id: 'm-eco', subject: 'Economics & Business Studies', teacher: 'Mr. Ravi Yadav' },
+    { id: 'm-found', subject: 'Class 9/10 Foundation (Science & Maths)', teacher: 'Faculty Team' },
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const finalCourse = course === 'Custom Combination of Individual Subjects' && customSubjects.length > 0
+      ? `Custom Combination: ${customSubjects.join(', ')}`
+      : course;
     setTimeout(() => {
       setIsSubmitting(false);
-      onSuccess(name, course, phone, branch, notes || 'Booked via Free Demo Modal');
+      onSuccess(name, finalCourse, phone, branch, notes || 'Booked via Free Demo Modal');
       setName('');
       setPhone('');
       setNotes('');
@@ -139,6 +155,118 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
               </select>
             </div>
           </div>
+
+          {/* Custom Subject Selection with Dropdown + Checkboxes */}
+          {course === 'Custom Combination of Individual Subjects' && (
+            <div className="p-3.5 bg-sky-50/90 border border-sky-300 rounded-xl space-y-2.5 text-xs animate-in fade-in duration-150">
+              <div className="flex items-center justify-between pb-1 border-b border-sky-200">
+                <span className="font-extrabold text-sky-950 uppercase tracking-wide">
+                  Custom Subject Selection
+                </span>
+                <span className="text-[11px] font-bold text-sky-800 bg-sky-200/80 px-2 py-0.5 rounded-full">
+                  {customSubjects.length} Selected
+                </span>
+              </div>
+
+              {/* Dropdown to select custom subject */}
+              <div>
+                <label className="block text-[11px] font-bold text-sky-950 mb-1">
+                  Select Custom Subject from Dropdown:
+                </label>
+                <select
+                  defaultValue=""
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (!val) return;
+                    if (val === 'ALL_SCIENCE') {
+                      setCustomSubjects(Array.from(new Set([
+                        ...customSubjects,
+                        'Physics - Mr. Arvind Kashyap',
+                        'Chemistry - Mr. Mukesh Saraswat',
+                        'Mathematics - Mr. Shiv Shankar Sharma'
+                      ])));
+                    } else if (val === 'CLEAR') {
+                      setCustomSubjects([]);
+                    } else if (!customSubjects.includes(val)) {
+                      setCustomSubjects(prev => [...prev, val]);
+                    }
+                    e.target.value = '';
+                  }}
+                  className="w-full px-2.5 py-2 rounded-lg border border-sky-300 text-xs bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                >
+                  <option value="" disabled>-- Click Dropdown to Select Subject --</option>
+                  <optgroup label="Add Individual Subject">
+                    {CUSTOM_SUBJECTS_LIST.map((item) => (
+                      <option key={item.id} value={`${item.subject} - ${item.teacher}`}>
+                        + Add {item.subject} ({item.teacher})
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Combos">
+                    <option value="ALL_SCIENCE">+ Add All 3 (Physics + Chemistry + Maths)</option>
+                  </optgroup>
+                  {customSubjects.length > 0 && (
+                    <optgroup label="Reset">
+                      <option value="CLEAR">✕ Clear All</option>
+                    </optgroup>
+                  )}
+                </select>
+              </div>
+
+              {/* Tags */}
+              {customSubjects.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {customSubjects.map((sub, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center text-[11px] font-semibold bg-white border border-sky-200 text-sky-900 px-2 py-0.5 rounded-md"
+                    >
+                      <span>{sub}</span>
+                      <button
+                        type="button"
+                        onClick={() => setCustomSubjects(prev => prev.filter(s => s !== sub))}
+                        className="ml-1 text-sky-400 hover:text-red-600 font-bold"
+                      >
+                        ✕
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Checkboxes */}
+              <div className="grid grid-cols-2 gap-1.5 pt-1">
+                {CUSTOM_SUBJECTS_LIST.map((item) => {
+                  const itemString = `${item.subject} - ${item.teacher}`;
+                  const isChecked = customSubjects.includes(itemString);
+                  return (
+                    <label
+                      key={item.id}
+                      className={`flex items-start space-x-1.5 p-1.5 rounded-lg border text-[11px] cursor-pointer transition select-none ${
+                        isChecked
+                          ? 'bg-white border-sky-500 text-sky-950 font-semibold shadow-2xs'
+                          : 'bg-white/80 border-slate-200 text-slate-700 hover:bg-white'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => {
+                          if (isChecked) {
+                            setCustomSubjects(prev => prev.filter(s => s !== itemString));
+                          } else {
+                            setCustomSubjects(prev => [...prev, itemString]);
+                          }
+                        }}
+                        className="w-3.5 h-3.5 text-sky-600 rounded border-slate-300 mt-0.5 cursor-pointer"
+                      />
+                      <span className="truncate">Checkbox - {item.subject} - {item.teacher}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1">

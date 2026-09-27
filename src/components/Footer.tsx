@@ -96,21 +96,21 @@ export const Footer: React.FC = () => {
             </h4>
             
             <div className="space-y-3 text-xs">
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 space-y-2">
                 <span className="text-[10px] font-extrabold uppercase text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded inline-block">
-                  Main Campus (Official Branch)
+                  Campus Centers
                 </span>
-                <div className="text-white font-semibold">D-Block, Shastri Nagar</div>
-                <div className="text-slate-300 text-[11px]">Ghaziabad, Uttar Pradesh – 201002</div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 space-y-1">
-                <span className="text-[10px] font-extrabold uppercase text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded inline-block">
-                  2nd Campus
-                </span>
-                <div className="text-white font-semibold">Vivekanand Nagar, Ghaziabad</div>
-                <div className="text-slate-400 text-[11px]">Near Community Center & Main Market</div>
-                <div className="text-slate-400 text-[11px]">Ghaziabad, Uttar Pradesh – 201001</div>
+                <div className="text-white font-semibold">Main Campus & 2nd Campus</div>
+                <p className="text-slate-400 text-[11px] leading-relaxed">
+                  Physical street addresses, landmarks, and live turn-by-turn navigation are provided in the Google Maps section above.
+                </p>
+                <a
+                  href="#google-maps-location"
+                  className="inline-flex items-center text-xs font-bold text-amber-400 hover:text-amber-300 pt-0.5"
+                >
+                  <MapPin className="w-3.5 h-3.5 mr-1" />
+                  <span>View Exact Address in Maps</span>
+                </a>
               </div>
 
               <div className="space-y-1 text-[11px] text-slate-300 pt-1">
@@ -131,20 +131,32 @@ export const Footer: React.FC = () => {
               Admissions & Helpline
             </h4>
             
-            <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 space-y-2 text-xs">
+            <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 space-y-2.5 text-xs">
               <span className="text-[10px] uppercase font-bold text-slate-400 block">
-                Central Phone for All Inquiries:
+                Central Academic Helpline:
               </span>
-              <a
-                href="tel:8800020688"
-                className="text-base font-extrabold text-amber-300 hover:text-amber-200 flex items-center transition"
-                title="Call Central Helpline"
-              >
-                <Phone className="w-4 h-4 mr-2 text-emerald-400 shrink-0" />
-                <span>+91 88000 20688</span>
-              </a>
+              <div className="flex items-center space-x-2 pt-0.5">
+                <a
+                  href="tel:8800020688"
+                  className="flex-1 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition shadow-sm"
+                  title="Call Admissions Desk"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Call Now</span>
+                </a>
+                <a
+                  href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20want%20to%20inquire%20about%20admissions."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition shadow-sm"
+                  title="Chat on WhatsApp"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
               <p className="text-[11px] text-slate-400">
-                Covers batch inquiries, demo bookings & admissions for both Shastri Nagar & Vivekanand Nagar centers.
+                Covers batch inquiries, demo bookings & admissions counseling for all subjects.
               </p>
             </div>
 
@@ -195,7 +207,7 @@ export const Footer: React.FC = () => {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-xs">
           <p>© 2026 Classes of Academia (COA). All Rights Reserved.</p>
           <div className="flex items-center space-x-3">
-            <span>Main Campus: D-Block, Shastri Nagar • 2nd: Vivekanand Nagar</span>
+            <span>Classes of Academia • Premier Individual Subject Coaching in Ghaziabad</span>
           </div>
         </div>
       </div>

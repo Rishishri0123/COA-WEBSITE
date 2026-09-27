@@ -131,9 +131,9 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
             <span className="text-sky-700 font-bold text-[10px]">Visiting: 4:00 PM – 7:30 PM (Mon–Sat)</span>
           </div>
           <div className="text-[11px] space-y-1 text-slate-600 pt-0.5">
-            <div><strong>Main Campus:</strong> D-Block, Shastri Nagar, Ghaziabad (201002)</div>
-            <div><strong>2nd Campus:</strong> Near Community Center, Vivekanand Nagar, Ghaziabad (201001)</div>
-            <div><strong>Central Admissions Desk:</strong> +91 88000 20688</div>
+            <div><strong>Main Campus & 2nd Campus:</strong> Official Centers in Ghaziabad</div>
+            <div><strong>Interactive Directions:</strong> View exact locations in the Maps section on the website</div>
+            <div><strong>Admissions Desk:</strong> Available via Call & WhatsApp action buttons below</div>
           </div>
         </div>
 

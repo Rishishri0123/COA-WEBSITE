@@ -37,7 +37,7 @@ export const BestCoachingSeoSection: React.FC<BestCoachingSeoSectionProps> = ({ 
             in Ghaziabad
           </h2>
           <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Searching for the <strong className="text-slate-800">best coaching</strong> for Class 9th, 10th, 11th, 12th (Physics, Chemistry, Maths & Commerce), JEE Main or CA Foundation? Here is how <strong className="text-slate-900">Classes of Academia</strong> delivers unmatched results across Shastri Nagar and Vivekanand Nagar through individual subject mastery.
+            Searching for the <strong className="text-slate-800">best coaching</strong> for Class 9th, 10th, 11th, 12th (Physics, Chemistry, Maths & Commerce), JEE Main or CA Foundation? Here is how <strong className="text-slate-900">Classes of Academia</strong> delivers unmatched results across Ghaziabad through individual subject mastery.
           </p>
         </div>
 
@@ -168,10 +168,10 @@ export const BestCoachingSeoSection: React.FC<BestCoachingSeoSectionProps> = ({ 
                 </tr>
 
                 <tr>
-                  <td className="p-4 sm:p-5 font-semibold text-slate-900">Transparent Single Helpline</td>
+                  <td className="p-4 sm:p-5 font-semibold text-slate-900">Direct Academic Helpline</td>
                   <td className="p-4 sm:p-5 bg-sky-50/50 font-bold text-sky-900 border-x border-sky-100 flex items-center space-x-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Unified direct helpline: 88000 20688</span>
+                    <span>Direct 1-tap Call & WhatsApp helpline</span>
                   </td>
                   <td className="p-4 sm:p-5 text-slate-500 flex items-center space-x-2">
                     <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
@@ -206,7 +206,7 @@ export const BestCoachingSeoSection: React.FC<BestCoachingSeoSectionProps> = ({ 
                 title="Call Central Helpline"
               >
                 <Phone className="w-3.5 h-3.5" />
-                <span>Call 88000 20688</span>
+                <span>Call Helpline</span>
               </a>
 
               <a

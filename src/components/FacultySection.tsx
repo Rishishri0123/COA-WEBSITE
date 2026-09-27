@@ -134,7 +134,7 @@ export const FacultySection: React.FC<FacultySectionProps> = ({ onOpenConsultati
                 Need Academic Guidance for Stream Selection?
               </h4>
               <p className="text-xs text-slate-300 mt-0.5">
-                Schedule a 1-on-1 counseling session with our senior teachers at either D-Block, Shastri Nagar or Vivekanand Nagar campus.
+                Schedule a 1-on-1 counseling session with our senior teachers at our campus centers (locations detailed in Maps section).
               </p>
             </div>
           </div>

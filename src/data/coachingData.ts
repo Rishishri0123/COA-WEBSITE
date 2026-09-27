@@ -51,7 +51,7 @@ export const BRANCHES_DATA: BranchInfo[] = [
     visitingHours: '4:00 PM – 7:30 PM, Monday through Saturday',
     sundayPolicy: 'Closed on Sundays (Note: Classes will be held on Sundays during exam periods)',
     primaryPhone: '+91 88000 20688',
-    mapEmbedQuery: '1,+Chak+Rd,+D+Block,+Dhanwantri+Puram,+Shastri+Nagar,+Ghaziabad,+Uttar+Pradesh+201002',
+    mapEmbedQuery: 'Classes+of+Academia,+D-Block,+Shastri+Nagar,+Ghaziabad,+Uttar+Pradesh+201002',
     googleMapsUrl: 'https://maps.app.goo.gl/rHwsf7oZzXfnP93j6',
     directionsUrl: 'https://maps.app.goo.gl/rHwsf7oZzXfnP93j6',
     metroStation: 'Shaheed Sthal (New Bus Adda) Red Line Metro Station (~3.5 km)',
@@ -76,9 +76,9 @@ export const BRANCHES_DATA: BranchInfo[] = [
     visitingHours: '4:00 PM – 7:30 PM, Monday through Saturday',
     sundayPolicy: 'Closed on Sundays (Note: Classes will be held on Sundays during exam periods)',
     primaryPhone: '+91 88000 20688',
-    mapEmbedQuery: 'Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
-    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
-    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
+    mapEmbedQuery: 'Classes+of+Academia,+Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Classes+of+Academia,+Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
+    directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Classes+of+Academia,+Vivekanand+Nagar,+Ghaziabad,+Uttar+Pradesh+201001',
     metroStation: 'Old Bus Stand / Shaheed Sthal Metro Station (~2.5 km)',
     features: [
       'Visiting Hours: 4:00 PM – 7:30 PM (Mon–Sat)',
@@ -461,11 +461,11 @@ export const FAQS_DATA = [
   },
   {
     question: 'How can I get the teachers’ phone numbers and schedule trial sessions?',
-    answer: 'To protect faculty focus during lectures, individual phone numbers and trial class schedules are provided immediately after submitting our contact/demo booking form on the website. You can also contact our central admissions helpline at +91 88000 20688.'
+    answer: 'To protect faculty focus during lectures, individual phone numbers and trial class schedules are provided immediately after submitting our contact/demo booking form on the website. You can also connect via our Call or WhatsApp helpline buttons.'
   },
   {
     question: 'Where are your coaching centers located in Ghaziabad?',
-    answer: 'We have two fully operational centers: Our Main Branch is located at D-Block, Shastri Nagar, Ghaziabad, Uttar Pradesh 201002 (Google Maps: https://maps.app.goo.gl/rHwsf7oZzXfnP93j6). Our 2nd Campus is in Vivekanand Nagar, Ghaziabad, convenient for students residing near Nehru Nagar, Kavi Nagar, Raj Nagar, and nearby residential societies.'
+    answer: 'We have two fully operational centers: Our Main Campus and 2nd Campus in Ghaziabad. Please refer to our interactive Google Maps section on the website for exact addresses, pin locations, and turn-by-turn driving directions.'
   },
   {
     question: 'Who are the faculty members teaching at Classes of Academia?',
@@ -473,7 +473,7 @@ export const FAQS_DATA = [
   },
   {
     question: 'How do I avail the Free Demo Classes?',
-    answer: 'Every prospective student is welcome to attend 2 days of free trial classes for any subject without any upfront registration fees. Simply fill out our online demo booking form or call our main helpline at +91 88000 20688.'
+    answer: 'Every prospective student is welcome to attend 2 days of free trial classes for any subject without any upfront registration fees. Simply fill out our online demo booking form or tap our Call / WhatsApp helpline buttons.'
   },
   {
     question: 'What are the batch sizes at Classes of Academia?',

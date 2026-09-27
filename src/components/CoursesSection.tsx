@@ -34,7 +34,7 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
             Academic Programs Engineered for High Scores
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2">
-            Structured syllabi, 2–3 monthly progress tests to monitor student performance, NCERT line-by-line mastery, and entrance exam techniques across both our D-Block, Shastri Nagar and Vivekanand Nagar centers.
+            Structured syllabi, 2–3 monthly progress tests to monitor student performance, NCERT line-by-line mastery, and entrance exam techniques across our Ghaziabad campus centers.
           </p>
         </div>
 

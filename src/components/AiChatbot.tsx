@@ -34,7 +34,7 @@ const INITIAL_MESSAGE: Message = {
   sender: 'assistant',
   text: `Hello! 👋 I'm the official AI Assistant for **Classes of Academia (COA)**.
 
-I have complete knowledge about our **D-Block, Shastri Nagar** & **Vivekanand Nagar** campuses, our **individual subject classes** (Physics, Chemistry, Mathematics, Commerce), visiting hours (**4:00 PM – 7:30 PM, Mon–Sat**), Sunday exam schedule, and our **2–3 monthly progress tests**.
+I have complete knowledge about our **Main Campus** & **2nd Campus** in Ghaziabad, our **individual subject classes** (Physics, Chemistry, Mathematics, Commerce), visiting hours (**4:00 PM – 7:30 PM, Mon–Sat**), Sunday exam schedule, and our **2–3 monthly progress tests**.
 
 *(Note: We do not force PCM packages—we offer individual subject classes! Website created by **Rishi Shrivastav**)*
 
@@ -61,6 +61,8 @@ export const AiChatbot: React.FC<AiChatbotProps> = ({ onOpenDemoModal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
+  const launcherButtonRef = useRef<HTMLButtonElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -72,6 +74,48 @@ export const AiChatbot: React.FC<AiChatbotProps> = ({ onOpenDemoModal }) => {
       setTimeout(() => inputRef.current?.focus(), 150);
     }
   }, [isOpen, messages]);
+
+  // Close AI Bot if person clicks anywhere on the website or presses Escape
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent | PointerEvent) => {
+      const target = e.target as Node;
+      // If click is inside chatbot window, do not close
+      if (chatWindowRef.current && chatWindowRef.current.contains(target)) {
+        return;
+      }
+      setIsOpen(false);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    // Use document & window listeners in capture phase
+    document.addEventListener('pointerdown', handleOutsideClick, true);
+    document.addEventListener('mousedown', handleOutsideClick, true);
+    document.addEventListener('click', handleOutsideClick, true);
+    document.addEventListener('touchstart', handleOutsideClick, true);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideClick, true);
+      document.removeEventListener('mousedown', handleOutsideClick, true);
+      document.removeEventListener('click', handleOutsideClick, true);
+      document.removeEventListener('touchstart', handleOutsideClick, true);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  // Support custom event to open chat from navbar or buttons
+  useEffect(() => {
+    const handleOpenCustom = () => setIsOpen(true);
+    window.addEventListener('open-coa-ai-chat', handleOpenCustom);
+    return () => window.removeEventListener('open-coa-ai-chat', handleOpenCustom);
+  }, []);
 
   const handleSendMessage = async (textToSend?: string) => {
     const query = (textToSend || inputValue).trim();
@@ -106,7 +150,7 @@ export const AiChatbot: React.FC<AiChatbotProps> = ({ onOpenDemoModal }) => {
       }
 
       const data = await res.json();
-      const replyText = data.reply || "I'm here to assist you with anything regarding Classes of Academia! Please feel free to call +91 88000 20688.";
+      const replyText = data.reply || "I'm here to assist you with anything regarding Classes of Academia! Please feel free to tap the Call Helpline or WhatsApp button.";
 
       // Determine appropriate suggested action
       const lower = query.toLowerCase();
@@ -142,17 +186,17 @@ He engineered this website to help students and parents in Ghaziabad easily disc
       } else if (q.includes('branch') || q.includes('location') || q.includes('address') || q.includes('where') || q.includes('campus')) {
         fallbackText = `**Classes of Academia Campuses in Ghaziabad:**
 
-📍 **1. Shastri Nagar Campus (Main Campus):**
-- **Address:** D-Block, Shastri Nagar, Ghaziabad, UP 201002 (Near Central Park)
+📍 **1. Main Campus Center:**
+- **Location:** View full physical address and live driving route in our **Maps section** above!
 - **Visiting Hours:** 4:00 PM – 7:30 PM, Monday through Saturday
 - **Sunday Policy:** Closed on Sundays (Classes held on Sundays during exam periods)
 
-📍 **2. Vivekanand Nagar Campus (2nd Campus):**
-- **Address:** Near Main Market / Community Center, Vivekanand Nagar, Ghaziabad, UP 201001
+📍 **2. 2nd Campus Center:**
+- **Location:** View full physical address and transit route in our **Maps section** above!
 - **Visiting Hours:** 4:00 PM – 7:30 PM, Monday through Saturday
 - **Sunday Policy:** Closed on Sundays (Classes held on Sundays during exam periods)
 
-📞 Central Helpline: **+91 88000 20688**`;
+📞 Admissions Helpline: **Available via the Call Helpline and WhatsApp action buttons**`;
       } else if (q.includes('test') || q.includes('progress') || q.includes('performance') || q.includes('exam') || q.includes('marks') || q.includes('score') || q.includes('report') || q.includes('evaluat')) {
         fallbackText = `**Student Performance & Progress Testing System:**
 
@@ -172,7 +216,7 @@ He engineered this website to help students and parents in Ghaziabad easily disc
         fallbackText = `**Visiting Hours & Sunday Policy:**
 
 🕒 **Official Visiting Hours:**
-- **4:00 PM – 7:30 PM, Monday through Saturday** (at both Shastri Nagar and Vivekanand Nagar campuses).
+- **4:00 PM – 7:30 PM, Monday through Saturday** (at both our campus centers).
 
 🗓️ **Sunday Policy:**
 - The coaching is **closed on Sundays**.
@@ -194,8 +238,8 @@ He engineered this website to help students and parents in Ghaziabad easily disc
 - To protect ongoing classroom lectures, **individual teacher phone numbers are provided immediately once you fill the Free Trial or Contact Form** on our website!
 - Once submitted, you instantly receive direct phone access for Physics, Chemistry, Mathematics, and Commerce HODs.
 
-🏢 **Central Admissions Desk & WhatsApp:**
-- **+91 88000 20688** (Available for all general campus inquiries, fee details, and demo bookings)`;
+🏢 **Central Admissions Helpline:**
+- Tap the **Call Helpline** or **WhatsApp** action buttons on the website anytime for general admissions counseling!`;
       } else if (q.includes('pcm') || q.includes('bundle') || q.includes('individual') || q.includes('subject')) {
         fallbackText = `**Individual Subject Classes at Classes of Academia:**
 
@@ -224,17 +268,16 @@ All subjects are taught as individual classes—no forced bundles!
 
 - Attend 2 actual classes for free with zero upfront fees.
 - Learn directly from senior faculty for your chosen individual subject.
-- You can reserve your seat right now by clicking the "Book Free Demo" button or calling **+91 88000 20688**.
+- You can reserve your seat right now by clicking the "Book Free Demo" button or using our Call Helpline.
 - Submitting the demo form will also reveal direct teacher phone numbers!`;
       } else {
         fallbackText = `Classes of Academia (COA) is Ghaziabad's premier coaching institute offering **individual subject classes** in Physics, Chemistry, Mathematics & Commerce (Classes IX-XII, JEE, CUET & CA Foundation).
 
-- **Main Campus:** D-Block, Shastri Nagar (201002)
-- **2nd Campus:** Vivekanand Nagar (201001)
+- **Campuses:** Main Campus & 2nd Campus in Ghaziabad (Full locations in Maps section)
 - **Visiting Hours:** 4:00 PM – 7:30 PM, Monday through Saturday
 - **Sunday Note:** Closed on Sundays (Classes held on Sundays during exam periods)
 - **Progress Tests:** 2–3 tests every month to monitor student performance
-- **Helpline:** +91 88000 20688
+- **Admissions Helpline:** Tap Call or WhatsApp buttons anytime
 - **Teacher Contacts:** Released immediately upon submitting the Free Trial / Contact form
 - **Website Creator:** Rishi Shrivastav
 
@@ -305,74 +348,115 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
   return (
     <>
       {/* Floating Trigger Launcher Button */}
-      <div className="fixed bottom-6 left-4 sm:bottom-8 sm:left-6 z-50">
+      <div className={`fixed bottom-5 left-3.5 sm:bottom-8 sm:left-6 z-[9985] ${isOpen ? 'hidden' : 'block'}`}>
         <button
+          ref={launcherButtonRef}
           onClick={() => setIsOpen(true)}
           id="open-ai-chatbot-btn"
           aria-label="Ask COA AI Assistant"
-          className="relative flex items-center space-x-2 px-4 py-3 rounded-full bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700 text-white font-bold text-sm shadow-xl shadow-sky-600/35 hover:shadow-sky-600/50 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/80 group cursor-pointer"
+          className="relative flex items-center space-x-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700 text-white font-bold text-xs sm:text-sm shadow-2xl shadow-sky-600/40 hover:shadow-sky-600/60 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/90 group cursor-pointer"
         >
           <div className="relative">
-            <Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 animate-pulse" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-sky-900 animate-ping" />
           </div>
           <span className="tracking-wide">Ask COA AI</span>
-          <span className="hidden md:inline-block text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full text-sky-100">
+          <span className="inline-block text-[10px] sm:text-[11px] font-semibold bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full text-sky-100">
             Online
           </span>
         </button>
       </div>
 
+      {/* Website Backdrop Overlay: Clicking ANYWHERE on the website closes the AI bot */}
+      {isOpen && (
+        <div
+          id="coa-ai-chatbot-backdrop"
+          onClick={() => setIsOpen(false)}
+          onPointerDown={() => setIsOpen(false)}
+          onMouseDown={() => setIsOpen(false)}
+          onTouchStart={() => setIsOpen(false)}
+          className="fixed inset-0 z-[9990] bg-slate-950/40 backdrop-blur-[2px] transition-opacity cursor-pointer animate-in fade-in duration-150"
+          aria-label="Click anywhere on the website to close AI assistant"
+          title="Click anywhere to close AI assistant"
+        />
+      )}
+
       {/* Chatbot Window Drawer / Modal */}
       {isOpen && (
         <div 
+          ref={chatWindowRef}
           id="coa-ai-chatbot-window"
-          className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-50 w-full sm:w-[420px] sm:max-w-[calc(100vw-3rem)] h-full sm:h-[620px] bg-white sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200/80 animate-in fade-in slide-in-from-bottom-5 duration-200"
+          className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-[9999] w-full sm:w-[420px] md:w-[440px] max-w-full sm:max-w-[calc(100vw-2rem)] h-[100dvh] sm:h-[580px] max-h-[100dvh] sm:max-h-[85vh] flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
-          {/* Header */}
-          <div className="bg-gradient-to-r from-slate-950 via-sky-950 to-slate-900 text-white p-4 flex items-center justify-between shrink-0 shadow-md">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-inner ring-2 ring-white/20">
-                <Bot className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h3 className="font-bold text-sm tracking-wide text-white">COA AI Assistant</h3>
-                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse" />
-                    Online
-                  </span>
+          {/* Dedicated Desktop Corner Close Button - Always visible and pinned to top-right of window */}
+          <button
+            onClick={() => setIsOpen(false)}
+            id="desktop-floating-close-ai-bot"
+            title="Close AI Assistant (Or click anywhere outside to close)"
+            aria-label="Close Chat Window"
+            className="hidden sm:flex absolute -top-3.5 -right-3.5 z-40 w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 active:scale-90 text-white items-center justify-center shadow-2xl border-2 border-white cursor-pointer transition-transform hover:scale-110"
+          >
+            <X className="w-4 h-4 stroke-[3]" />
+          </button>
+
+          {/* Inner chat box container */}
+          <div className="relative w-full h-full bg-white sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border sm:border-2 border-slate-300">
+            {/* Header */}
+            <div className="sticky top-0 z-20 bg-gradient-to-r from-slate-950 via-sky-950 to-slate-900 text-white px-3.5 py-3 sm:px-4 sm:py-3.5 flex items-center justify-between shrink-0 shadow-md">
+              <div className="flex items-center space-x-2.5 min-w-0 pr-2">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-inner ring-2 ring-white/20 shrink-0">
+                  <Bot className="w-5 h-5" />
                 </div>
-                <p className="text-[11px] text-sky-200">Admissions, Faculty & Course Guide</p>
+                <div className="min-w-0">
+                  <div className="flex items-center space-x-1.5 flex-wrap">
+                    <h3 className="font-bold text-sm tracking-wide text-white truncate">COA AI Assistant</h3>
+                    <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1 animate-pulse" />
+                      Online
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-sky-200 truncate">Admissions, Faculty & Course Guide</p>
+                </div>
+              </div>
+
+              {/* Header Action Buttons with High-Contrast Visible Close Button */}
+              <div className="flex items-center space-x-1.5 shrink-0">
+                <button
+                  onClick={handleResetChat}
+                  title="Restart Conversation"
+                  className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition cursor-pointer"
+                  aria-label="Restart Conversation"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  id="close-ai-chatbot-btn"
+                  title="Close AI Assistant (Or click anywhere outside to close)"
+                  aria-label="Close Chat Window"
+                  className="flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-xs shadow-md transition-all cursor-pointer border-2 border-white/60 ring-2 ring-red-500/40 shrink-0"
+                >
+                  <X className="w-4 h-4 stroke-[3]" />
+                  <span className="font-extrabold text-xs tracking-wider uppercase">Close</span>
+                </button>
               </div>
             </div>
 
-            <div className="flex items-center space-x-1">
-              <button
-                onClick={handleResetChat}
-                title="Restart Conversation"
-                className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition"
-              >
-                <RotateCcw className="w-4 h-4" />
-              </button>
+            {/* Website Credit Sub-banner with tap outside hint */}
+            <div className="bg-sky-50 px-3.5 py-1.5 border-b border-sky-100 flex items-center justify-between text-[11px] text-sky-900 shrink-0">
+              <div className="flex items-center space-x-1.5 font-medium truncate">
+                <Code className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                <span className="truncate">Website made by: <strong className="font-bold text-sky-800">Rishi Shrivastav</strong></span>
+              </div>
               <button
                 onClick={() => setIsOpen(false)}
-                title="Close Chat"
-                className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition cursor-pointer"
+                className="text-[10px] text-slate-500 hover:text-red-600 font-semibold shrink-0 cursor-pointer ml-2 flex items-center space-x-0.5"
+                title="Click here or anywhere outside to close"
               >
-                <X className="w-5 h-5" />
+                <span>Tap outside to close</span>
+                <span className="text-red-500 font-bold">✕</span>
               </button>
             </div>
-          </div>
-
-          {/* Website Credit Sub-banner */}
-          <div className="bg-sky-50 px-4 py-1.5 border-b border-sky-100 flex items-center justify-between text-[11px] text-sky-900">
-            <div className="flex items-center space-x-1.5 font-medium">
-              <Code className="w-3.5 h-3.5 text-sky-600" />
-              <span>Website made by: <strong className="font-bold text-sky-800">Rishi Shrivastav</strong></span>
-            </div>
-            <span className="text-[10px] text-slate-500">Classes of Academia</span>
-          </div>
 
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/70 text-xs">
@@ -408,9 +492,10 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
                       <a
                         href={`tel:${MAIN_HELPLINE.raw}`}
                         className="inline-flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-sky-50 text-sky-700 font-bold text-xs border border-sky-200"
+                        title="Call Admissions Helpline"
                       >
                         <Phone className="w-3.5 h-3.5" />
-                        <span>Call 88000 20688</span>
+                        <span>Call Helpline</span>
                       </a>
                     </div>
                   )}
@@ -420,9 +505,10 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
                       <a
                         href={`tel:${MAIN_HELPLINE.raw}`}
                         className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs transition"
+                        title="Call Admissions Helpline"
                       >
                         <Phone className="w-3.5 h-3.5" />
-                        <span>Call Admissions: +91 88000 20688</span>
+                        <span>Call Admissions Helpline</span>
                       </a>
                     </div>
                   )}
@@ -513,14 +599,15 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
             </button>
           </form>
 
-          {/* Footer note */}
-          <div className="bg-slate-100 px-3 py-1.5 text-center text-[10px] text-slate-500 flex items-center justify-center space-x-1.5 shrink-0 border-t border-slate-200">
+          {/* Footer note with mobile safe padding */}
+          <div className="bg-slate-100 px-3 py-1.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center text-[10px] text-slate-500 flex items-center justify-center space-x-1.5 shrink-0 border-t border-slate-200">
             <span>Classes of Academia AI</span>
             <span>•</span>
             <span className="font-semibold text-slate-700">Website made by Rishi Shrivastav</span>
           </div>
         </div>
-      )}
-    </>
-  );
+      </div>
+    )}
+  </>
+);
 };

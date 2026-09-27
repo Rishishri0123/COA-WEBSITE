@@ -14,12 +14,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
       {/* Top Notification & Contact Bar */}
       <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950 text-white text-xs py-2 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          {/* Official Location Badge */}
+          {/* Official Location & Tagline Badge */}
           <div className="flex items-center space-x-3 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center text-amber-300 font-semibold text-center sm:text-left">
+            <a href="#google-maps-location" className="flex items-center text-amber-300 hover:text-amber-200 transition font-semibold text-center sm:text-left">
               <MapPin className="w-3.5 h-3.5 mr-1.5 text-amber-400 shrink-0" />
-              Main: D-Block, Shastri Nagar | 2nd: Vivekanand Nagar, Gzb
-            </span>
+              Premier Coaching Institute | View Campuses in Maps Section
+            </a>
             <span className="hidden lg:inline text-slate-500">|</span>
             <span className="hidden lg:flex items-center text-slate-300">
               <GraduationCap className="w-3.5 h-3.5 mr-1.5 text-sky-400 shrink-0" />
@@ -39,12 +39,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
               <span>Book Your Free Trial Class</span>
             </button>
 
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-coa-ai-chat'))}
+              className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-indigo-600/40 hover:bg-indigo-600/60 text-indigo-100 border border-indigo-400/40 font-bold transition cursor-pointer"
+              title="Ask AI Assistant"
+            >
+              <Sparkles className="w-3 h-3 text-amber-300" />
+              <span>Ask AI</span>
+            </button>
+
             <a
               href="tel:8800020688"
               className="hidden sm:flex items-center font-semibold bg-white/10 hover:bg-white/20 transition px-2.5 py-1 rounded-full text-slate-200"
+              title="Call Central Helpline"
             >
               <Phone className="w-3 h-3 mr-1.5 text-sky-400" />
-              <span>88000 20688</span>
+              <span>Call Helpline</span>
             </a>
 
             <a
@@ -52,6 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center font-semibold bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 transition px-2.5 py-1 rounded-full border border-emerald-500/30"
+              title="Chat on WhatsApp"
             >
               <MessageCircle className="w-3 h-3 mr-1.5 text-emerald-400" />
               <span>WhatsApp</span>
@@ -114,12 +125,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
             <a
               href="tel:8800020688"
               id="desktop-nav-call-btn"
-              className="inline-flex items-center justify-center px-2.5 xl:px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-xs transition shadow-xs group"
-              title="Call Helpline: 88000 20688"
+              className="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 font-bold text-xs transition shadow-xs group"
+              title="Call Central Helpline"
             >
-              <Phone className="w-3.5 h-3.5 mr-1 text-sky-600 group-hover:scale-110 transition-transform" />
-              <span className="hidden xl:inline">88000 20688</span>
-              <span className="xl:hidden">Call</span>
+              <Phone className="w-3.5 h-3.5 mr-1.5 text-sky-600 group-hover:scale-110 transition-transform" />
+              <span>Call</span>
             </a>
 
             <a
@@ -127,11 +137,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
               target="_blank"
               rel="noopener noreferrer"
               id="desktop-nav-whatsapp-btn"
-              className="inline-flex items-center justify-center px-2.5 xl:px-3 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition shadow-xs group"
-              title="Chat on WhatsApp: 88000 20688"
+              className="inline-flex items-center justify-center px-3 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition shadow-xs group"
+              title="Chat on WhatsApp"
             >
-              <MessageCircle className="w-3.5 h-3.5 xl:mr-1 group-hover:scale-110 transition-transform" />
-              <span className="hidden xl:inline">WhatsApp</span>
+              <MessageCircle className="w-3.5 h-3.5 mr-1.5 group-hover:scale-110 transition-transform" />
+              <span>WhatsApp</span>
             </a>
 
             <button
@@ -246,7 +256,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
               onClick={() => setMobileMenuOpen(false)}
               className="p-2 rounded-lg bg-slate-50 hover:bg-sky-50 hover:text-sky-700 col-span-2"
             >
-              Campuses in Shastri & Vivekanand Nagar
+              Admissions & Contact Form
             </a>
           </div>
 
@@ -264,7 +274,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDemoModal }) => {
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                document.getElementById('open-ai-chatbot-btn')?.click();
+                window.dispatchEvent(new CustomEvent('open-coa-ai-chat'));
               }}
               className="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-700 to-sky-700 text-white font-bold text-xs text-center flex items-center justify-center space-x-2 shadow-xs cursor-pointer"
             >
