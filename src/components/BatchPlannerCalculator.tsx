@@ -100,7 +100,7 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
   const selectedSummaryString = `${gradeOptions.find(g => g.id === selectedGrade)?.label}: ${selectedSubjectObjects.map(s => s.name).join(', ')} (${preferredCampus === 'shastri' ? 'Main Campus' : '2nd Campus'})`;
 
   return (
-    <section id="batch-planner" className="py-16 sm:py-20 bg-slate-900 text-white relative overflow-hidden">
+    <section id="batch-planner" className="py-16 sm:py-20 bg-slate-900 dark:bg-slate-950 text-white relative overflow-hidden transition-colors">
       {/* Subtle ambient lighting */}
       <div className="absolute top-1/4 left-0 -ml-32 w-80 h-80 bg-sky-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 -mr-32 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -255,7 +255,7 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
 
           {/* Right Column: Live Plan Summary & Free Trial CTA */}
           <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-5">
-            <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-700 shadow-2xl relative">
+            <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-3xl p-6 sm:p-7 border border-sky-400/30 shadow-2xl relative animate-border-glow">
               <div className="flex items-center justify-between pb-4 border-b border-slate-700/80">
                 <div>
                   <span className="text-[10px] uppercase tracking-wider font-extrabold text-amber-400">
@@ -265,7 +265,7 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
                     Your Personalized Program
                   </h3>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 animate-pulse-soft">
                   <Sparkles className="w-5 h-5" />
                 </div>
               </div>
@@ -327,10 +327,10 @@ export const BatchPlannerCalculator: React.FC<BatchPlannerCalculatorProps> = ({ 
               <div className="pt-5 space-y-3">
                 <button
                   onClick={() => onOpenDemoModal(selectedSummaryString)}
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold text-sm shadow-lg shadow-sky-950 flex items-center justify-center space-x-2 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold text-sm shadow-lg shadow-sky-950 flex items-center justify-center space-x-2 transition-all transform hover:-translate-y-0.5 cursor-pointer btn-shimmer hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span>Reserve 2-Day Free Trial For This Plan</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 animate-bounce-gentle" />
                 </button>
 
                 <p className="text-center text-[11px] text-slate-400 flex items-center justify-center">

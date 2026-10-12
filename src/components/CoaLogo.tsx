@@ -20,7 +20,7 @@ export const CoaLogo: React.FC<CoaLogoProps> = ({
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <div
-        className={`${iconSize} rounded-2xl bg-white p-1.5 shadow-sm border border-slate-200/80 flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-105`}
+        className={`${iconSize} rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-sm border border-slate-200/80 dark:border-slate-700 flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-105`}
         title="Classes of Academia"
       >
         <svg
@@ -124,14 +124,14 @@ export const CoaLogo: React.FC<CoaLogoProps> = ({
         <div className="flex flex-col">
           <div
             className={`font-heading font-extrabold tracking-tight leading-none ${titleSize} ${
-              textColor === 'light' ? 'text-white' : 'text-slate-900'
+              textColor === 'light' ? 'text-white' : 'text-slate-900 dark:text-white'
             }`}
           >
             CLASSES OF ACADEMIA
           </div>
           <div
             className={`font-bold tracking-wider uppercase mt-1 flex items-center gap-1.5 ${tagSize} ${
-              textColor === 'light' ? 'text-amber-300' : 'text-rose-600'
+              textColor === 'light' ? 'text-amber-300' : 'text-rose-600 dark:text-rose-400'
             }`}
           >
             <span>Futuristic</span>

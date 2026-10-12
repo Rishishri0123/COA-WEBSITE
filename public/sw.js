@@ -1,76 +1,54 @@
-// Classes of Academia Service Worker for PWA Installation & Offline App Shell
-const CACHE_NAME = 'coa-cache-v1';
-const STATIC_ASSETS = [
-  '/',
-  '/admin',
-  '/manifest.webmanifest',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/apple-touch-icon.png'
-];
+// Classes of Academia Service Worker - Network-First Strategy to ensure users always see live updates
+const CACHE_NAME = 'coa-cache-v2';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch((err) => {
-        console.warn('Pre-cache error (non-fatal):', err);
-      });
-    })
-  );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
+      // Purge all old caches immediately
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.map((key) => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Network-only for API requests to ensure real-time inquiries and fresh stats
+  // Network-only for API requests
   if (url.pathname.startsWith('/api/')) {
     return;
   }
 
-  // Navigation requests for SPA (/admin or /)
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => {
+  // Network-First strategy: Always fetch latest from server, fallback to cache only if completely offline
+  event.respondWith(
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (
+          networkResponse &&
+          networkResponse.status === 200 &&
+          networkResponse.type === 'basic' &&
+          event.request.method === 'GET'
+        ) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(() => {
         return caches.match(event.request).then((cached) => {
-          return cached || caches.match('/');
+          if (cached) return cached;
+          if (event.request.mode === 'navigate') {
+            return caches.match('/');
+          }
+          return new Response('Network offline', { status: 503, statusText: 'Offline' });
         });
       })
-    );
-    return;
-  }
-
-  // Cache-first, network-fallback for static assets
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((networkResponse) => {
-        if (
-          !networkResponse ||
-          networkResponse.status !== 200 ||
-          networkResponse.type !== 'basic'
-        ) {
-          return networkResponse;
-        }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-        return networkResponse;
-      });
-    })
   );
 });

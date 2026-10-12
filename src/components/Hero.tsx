@@ -90,57 +90,20 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
     <section className="relative bg-[#050C1A] text-white overflow-hidden pt-10 pb-16 lg:pt-14 lg:pb-24">
       {/* Background ambient lighting and subtle micro-grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b0f_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0f_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-      <div className="absolute top-0 right-1/4 -mt-20 w-[500px] h-[500px] rounded-full bg-sky-500/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-10 -mb-20 w-[400px] h-[400px] rounded-full bg-amber-500/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 -mt-20 w-[520px] h-[520px] rounded-full bg-sky-500/15 blur-[120px] pointer-events-none animate-float-slow" />
+      <div className="absolute bottom-0 left-10 -mb-20 w-[420px] h-[420px] rounded-full bg-amber-500/15 blur-[100px] pointer-events-none animate-float-reverse" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Status Bar: Visiting Hours & Transparency */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 mb-8 border-b border-white/10 text-xs text-slate-300">
-          <div className="flex items-center space-x-2">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="font-semibold text-slate-200">
-              Visiting Hours: <strong className="text-emerald-400">4:00 PM – 7:30 PM (Mon–Sat)</strong>
-            </span>
-            <span className="text-slate-500 hidden sm:inline">·</span>
-            <a href="#google-maps-location" className="text-slate-300 hover:text-amber-300 transition hidden sm:inline">
-              Campuses: <strong className="text-slate-200 underline">Main & 2nd Campus</strong> (View in Maps)
-            </a>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <span className="text-slate-400 hidden md:inline">2–3 Monthly Progress Tests with Parents Reporting</span>
-            <div className="flex items-center space-x-2">
-              <a
-                href="tel:8800020688"
-                className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-sky-300 font-bold text-xs flex items-center space-x-1 transition"
-                title="Call Central Helpline"
-              >
-                <Phone className="w-3.5 h-3.5 text-sky-400" />
-                <span>Call</span>
-              </a>
-              <a
-                href="https://wa.me/918800020688?text=Hello%20Classes%20of%20Academia%2C%20I%20would%20like%20to%20inquire%20about%20admissions."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center space-x-1 transition"
-                title="Chat on WhatsApp"
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Headline, Value Proposition & Faculty Explorer */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Admissions Banner */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-amber-300 text-xs font-semibold tracking-wide">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            {/* Admissions Banner with live pulsing badge */}
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-sky-400/30 text-amber-300 text-xs font-semibold tracking-wide backdrop-blur-md animate-pulse-glow hover:border-amber-400/60 transition">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-bounce-gentle" />
               <span>Admissions Open for 2026–27 Batches • 2-Day Free Trial Available</span>
             </div>
 
@@ -281,7 +244,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
           {/* Right Column: High-Conversion Free Trial Booking Card */}
           <div className="lg:col-span-5">
             <div className="relative">
-              <div className="bg-slate-900/90 backdrop-blur-2xl text-slate-100 p-6 sm:p-8 rounded-3xl shadow-2xl border border-white/15 relative">
+              <div className="bg-slate-900/90 backdrop-blur-2xl text-slate-100 p-6 sm:p-8 rounded-3xl shadow-2xl border border-sky-400/20 animate-border-glow relative">
                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
                   <div>
                     <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-400">
@@ -291,7 +254,10 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                       Reserve 2-Day Free Trial
                     </h3>
                   </div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-[10px] text-emerald-300 font-semibold">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+                    <span>Live Slots</span>
+                  </div>
                 </div>
 
                 <p className="text-xs text-slate-300 mb-5 leading-normal">
@@ -308,7 +274,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Aryan Sharma"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white placeholder-slate-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white placeholder-slate-500 transition-all focus:border-sky-400"
                     />
                   </div>
 
@@ -321,7 +287,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="10-digit mobile number"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white placeholder-slate-500"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white placeholder-slate-500 transition-all focus:border-sky-400"
                     />
                   </div>
 
@@ -332,7 +298,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                         id="hero-grade-select"
                         value={grade}
                         onChange={(e) => setGrade(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white"
+                        className="w-full px-3 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white transition-all focus:border-sky-400"
                       >
                         <option value="11th-12th-Science">XI-XII Science (Phy/Chem/Maths)</option>
                         <option value="11th-12th-Commerce">XI-XII Commerce (Accounts/Eco/BST)</option>
@@ -348,7 +314,7 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                       <select
                         value={branch}
                         onChange={(e) => setBranch(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white"
+                        className="w-full px-3 py-2.5 rounded-xl border border-slate-700 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-800 text-white transition-all focus:border-sky-400"
                       >
                         <option value="Main Campus">Main Campus</option>
                         <option value="2nd Campus">2nd Campus</option>
@@ -359,10 +325,10 @@ export const Hero: React.FC<HeroProps> = ({ onSuccessSubmit }) => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold text-sm shadow-lg shadow-sky-950 transition-all flex items-center justify-center space-x-2 cursor-pointer mt-2"
+                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-500 via-sky-600 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-sm shadow-lg shadow-sky-950 transition-all flex items-center justify-center space-x-2 cursor-pointer mt-2 btn-shimmer hover:scale-[1.02] active:scale-[0.99]"
                   >
                     <span>{isSubmitting ? 'Reserving Trial Slot...' : 'Book Your 2-Day Free Trial'}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 animate-bounce-gentle" />
                   </button>
                 </form>
 

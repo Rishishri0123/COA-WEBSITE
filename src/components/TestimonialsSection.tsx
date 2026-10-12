@@ -93,7 +93,7 @@ export const TestimonialsSection: React.FC = () => {
           {filteredTestimonials.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-lg transition-all duration-300 relative group"
+              className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-lg transition-all duration-300 relative group interactive-card card-hover-glow hover:border-amber-300"
             >
               <div>
                 {/* Header score badge */}

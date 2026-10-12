@@ -79,38 +79,59 @@ export const AiChatbot: React.FC<AiChatbotProps> = ({ onOpenDemoModal }) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleOutsideClick = (e: MouseEvent | TouchEvent | PointerEvent) => {
-      const target = e.target as Node;
-      // If click is inside chatbot window, do not close
-      if (chatWindowRef.current && chatWindowRef.current.contains(target)) {
-        return;
-      }
-      setIsOpen(false);
-    };
+    // Dispatch event so mobile floating bar knows chat is open
+    window.dispatchEvent(new CustomEvent('open-coa-ai-chat'));
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setIsOpen(false);
       }
     };
-
-    // Use document & window listeners in capture phase
-    document.addEventListener('pointerdown', handleOutsideClick, true);
-    document.addEventListener('mousedown', handleOutsideClick, true);
-    document.addEventListener('click', handleOutsideClick, true);
-    document.addEventListener('touchstart', handleOutsideClick, true);
     window.addEventListener('keydown', handleKeyDown);
 
+    // When clicking an iframe (like Google Maps), window blurs
+    const handleWindowBlur = () => {
+      setIsOpen(false);
+    };
+    window.addEventListener('blur', handleWindowBlur);
+
+    // Delay attaching document listeners by 150ms so the tap that opened the modal does not immediately self-close it on mobile!
+    let active = true;
+    let handleOutsideClick: ((e: MouseEvent | TouchEvent) => void) | null = null;
+
+    const timer = setTimeout(() => {
+      if (!active) return;
+      handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+        const target = e.target as Node;
+        // If click is inside chatbot window, do not close
+        if (chatWindowRef.current && chatWindowRef.current.contains(target)) {
+          return;
+        }
+        // If click is on the launcher button, ignore
+        if (launcherButtonRef.current && launcherButtonRef.current.contains(target)) {
+          return;
+        }
+        setIsOpen(false);
+      };
+
+      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('touchstart', handleOutsideClick);
+    }, 150);
+
     return () => {
-      document.removeEventListener('pointerdown', handleOutsideClick, true);
-      document.removeEventListener('mousedown', handleOutsideClick, true);
-      document.removeEventListener('click', handleOutsideClick, true);
-      document.removeEventListener('touchstart', handleOutsideClick, true);
+      active = false;
+      clearTimeout(timer);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('blur', handleWindowBlur);
+      if (handleOutsideClick) {
+        document.removeEventListener('mousedown', handleOutsideClick);
+        document.removeEventListener('touchstart', handleOutsideClick);
+      }
+      window.dispatchEvent(new CustomEvent('close-coa-ai-chat'));
     };
   }, [isOpen]);
 
-  // Support custom event to open chat from navbar or buttons
+  // Support custom event to open chat from navbar, mobile dock, or buttons
   useEffect(() => {
     const handleOpenCustom = () => setIsOpen(true);
     window.addEventListener('open-coa-ai-chat', handleOpenCustom);
@@ -347,21 +368,21 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
 
   return (
     <>
-      {/* Floating Trigger Launcher Button */}
-      <div className={`fixed bottom-5 left-3.5 sm:bottom-8 sm:left-6 z-[9985] ${isOpen ? 'hidden' : 'block'}`}>
+      {/* Floating Trigger Launcher Button (Desktop & Tablet) */}
+      <div className={`hidden sm:block fixed bottom-8 left-6 z-[9985] ${isOpen ? 'hidden' : 'block'}`}>
         <button
           ref={launcherButtonRef}
           onClick={() => setIsOpen(true)}
           id="open-ai-chatbot-btn"
           aria-label="Ask COA AI Assistant"
-          className="relative flex items-center space-x-2 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700 text-white font-bold text-xs sm:text-sm shadow-2xl shadow-sky-600/40 hover:shadow-sky-600/60 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/90 group cursor-pointer"
+          className="relative flex items-center space-x-2 px-4 py-3 rounded-full bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700 text-white font-bold text-sm shadow-2xl shadow-sky-600/40 hover:shadow-sky-600/60 hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white/90 group cursor-pointer btn-shimmer animate-pulse-glow"
         >
           <div className="relative">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 animate-pulse" />
+            <Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-sky-900 animate-ping" />
           </div>
           <span className="tracking-wide">Ask COA AI</span>
-          <span className="inline-block text-[10px] sm:text-[11px] font-semibold bg-white/20 px-1.5 sm:px-2 py-0.5 rounded-full text-sky-100">
+          <span className="inline-block text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full text-sky-100">
             Online
           </span>
         </button>
@@ -373,9 +394,7 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
           id="coa-ai-chatbot-backdrop"
           onClick={() => setIsOpen(false)}
           onPointerDown={() => setIsOpen(false)}
-          onMouseDown={() => setIsOpen(false)}
-          onTouchStart={() => setIsOpen(false)}
-          className="fixed inset-0 z-[9990] bg-slate-950/40 backdrop-blur-[2px] transition-opacity cursor-pointer animate-in fade-in duration-150"
+          className="fixed inset-0 z-[9990] bg-slate-950/60 backdrop-blur-[2px] transition-opacity cursor-pointer animate-in fade-in duration-150"
           aria-label="Click anywhere on the website to close AI assistant"
           title="Click anywhere to close AI assistant"
         />
@@ -386,26 +405,28 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
         <div 
           ref={chatWindowRef}
           id="coa-ai-chatbot-window"
-          className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:left-6 z-[9999] w-full sm:w-[420px] md:w-[440px] max-w-full sm:max-w-[calc(100vw-2rem)] h-[100dvh] sm:h-[580px] max-h-[100dvh] sm:max-h-[85vh] flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-200"
+          style={{
+            maxHeight: 'calc(100dvh - 4.5rem)',
+            height: 'min(580px, calc(100dvh - 4.5rem))'
+          }}
+          className="fixed inset-x-0 bottom-0 top-14 sm:top-auto sm:bottom-5 sm:left-6 z-[9999] w-full sm:w-[420px] md:w-[440px] max-w-full sm:max-w-[calc(100vw-2rem)] flex flex-col animate-in fade-in slide-in-from-bottom-5 duration-200"
         >
-          {/* Dedicated Desktop Corner Close Button - Always visible and pinned to top-right of window */}
-          <button
+          {/* Mobile Drawer Pull Indicator */}
+          <div 
+            className="sm:hidden flex items-center justify-center pb-2 cursor-pointer" 
             onClick={() => setIsOpen(false)}
-            id="desktop-floating-close-ai-bot"
-            title="Close AI Assistant (Or click anywhere outside to close)"
-            aria-label="Close Chat Window"
-            className="hidden sm:flex absolute -top-3.5 -right-3.5 z-40 w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 active:scale-90 text-white items-center justify-center shadow-2xl border-2 border-white cursor-pointer transition-transform hover:scale-110"
+            title="Tap to close chat"
           >
-            <X className="w-4 h-4 stroke-[3]" />
-          </button>
+            <div className="w-12 h-1.5 rounded-full bg-white/70 shadow-md" />
+          </div>
 
           {/* Inner chat box container */}
-          <div className="relative w-full h-full bg-white sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border sm:border-2 border-slate-300">
+          <div className="relative w-full h-full bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border sm:border-2 border-slate-300">
             {/* Header */}
             <div className="sticky top-0 z-20 bg-gradient-to-r from-slate-950 via-sky-950 to-slate-900 text-white px-3.5 py-3 sm:px-4 sm:py-3.5 flex items-center justify-between shrink-0 shadow-md">
               <div className="flex items-center space-x-2.5 min-w-0 pr-2">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-inner ring-2 ring-white/20 shrink-0">
-                  <Bot className="w-5 h-5" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-inner ring-2 ring-white/20 shrink-0">
+                  <Bot className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center space-x-1.5 flex-wrap">
@@ -419,7 +440,7 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
                 </div>
               </div>
 
-              {/* Header Action Buttons with High-Contrast Visible Close Button */}
+              {/* Header Action Buttons - Single, clear Close button */}
               <div className="flex items-center space-x-1.5 shrink-0">
                 <button
                   onClick={handleResetChat}
@@ -434,7 +455,7 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
                   id="close-ai-chatbot-btn"
                   title="Close AI Assistant (Or click anywhere outside to close)"
                   aria-label="Close Chat Window"
-                  className="flex items-center space-x-1 px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-xs shadow-md transition-all cursor-pointer border-2 border-white/60 ring-2 ring-red-500/40 shrink-0"
+                  className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-xs shadow-md transition-all cursor-pointer border-2 border-white ring-2 ring-red-500/40 shrink-0"
                 >
                   <X className="w-4 h-4 stroke-[3]" />
                   <span className="font-extrabold text-xs tracking-wider uppercase">Close</span>
@@ -442,20 +463,15 @@ Feel free to ask about courses, faculty, timings, test schedule, or book a free 
               </div>
             </div>
 
-            {/* Website Credit Sub-banner with tap outside hint */}
-            <div className="bg-sky-50 px-3.5 py-1.5 border-b border-sky-100 flex items-center justify-between text-[11px] text-sky-900 shrink-0">
+            {/* Website Credit Sub-banner */}
+            <div className="bg-sky-50 px-3.5 py-2 border-b border-sky-100 flex items-center justify-between text-[11px] text-sky-900 shrink-0">
               <div className="flex items-center space-x-1.5 font-medium truncate">
                 <Code className="w-3.5 h-3.5 text-sky-600 shrink-0" />
                 <span className="truncate">Website made by: <strong className="font-bold text-sky-800">Rishi Shrivastav</strong></span>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-[10px] text-slate-500 hover:text-red-600 font-semibold shrink-0 cursor-pointer ml-2 flex items-center space-x-0.5"
-                title="Click here or anywhere outside to close"
-              >
-                <span>Tap outside to close</span>
-                <span className="text-red-500 font-bold">✕</span>
-              </button>
+              <span className="text-[10px] text-slate-500 shrink-0 ml-2 hidden sm:inline">
+                Tap outside to close
+              </span>
             </div>
 
           {/* Messages Area */}

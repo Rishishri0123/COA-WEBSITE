@@ -44,14 +44,14 @@ export const WhyUsSection: React.FC = () => {
   return (
     <section id="why-us" className="py-16 sm:py-24 bg-slate-950 text-white relative overflow-hidden border-b border-slate-800">
       {/* Subtle Background Elements */}
-      <div className="absolute top-0 right-1/4 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none animate-float-slow" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none animate-float-reverse" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-amber-400 font-extrabold text-xs uppercase tracking-widest bg-amber-400/10 px-3.5 py-1.5 rounded-full border border-amber-400/20 inline-flex items-center">
-            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+          <span className="text-amber-400 font-extrabold text-xs uppercase tracking-widest bg-amber-400/10 px-3.5 py-1.5 rounded-full border border-amber-400/20 inline-flex items-center animate-pulse-soft">
+            <Sparkles className="w-3.5 h-3.5 mr-1.5 animate-bounce-gentle" />
             The Classes of Academia Advantage
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">
@@ -69,10 +69,10 @@ export const WhyUsSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-white/[0.04] border border-white/10 p-6 sm:p-7 rounded-3xl backdrop-blur-sm hover:bg-white/[0.07] hover:border-white/20 transition-all duration-300 group"
+                className="bg-white/[0.04] border border-white/10 p-6 sm:p-7 rounded-3xl backdrop-blur-sm hover:bg-white/[0.07] hover:border-sky-400/30 transition-all duration-300 group interactive-card card-hover-glow"
               >
                 <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold mb-4 border ${adv.color} group-hover:scale-105 transition-transform`}
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold mb-4 border ${adv.color} group-hover:scale-110 transition-transform`}
                 >
                   <Icon className="w-6 h-6" />
                 </div>

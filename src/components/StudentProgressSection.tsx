@@ -25,8 +25,8 @@ export const StudentProgressSection: React.FC<StudentProgressSectionProps> = ({ 
 
         {/* 3 Core Testing Pillars */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-sky-300 transition-all shadow-sm">
-            <div className="w-12 h-12 rounded-xl bg-sky-600 text-white flex items-center justify-center mb-4 shadow-sm">
+          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-sky-300 transition-all shadow-sm interactive-card card-hover-glow group">
+            <div className="w-12 h-12 rounded-xl bg-sky-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
               <FileText className="w-6 h-6" />
             </div>
             <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">
@@ -47,8 +47,8 @@ export const StudentProgressSection: React.FC<StudentProgressSectionProps> = ({ 
             </ul>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-all shadow-sm">
-            <div className="w-12 h-12 rounded-xl bg-purple-600 text-white flex items-center justify-center mb-4 shadow-sm">
+          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:purple-300 transition-all shadow-sm interactive-card card-hover-glow group">
+            <div className="w-12 h-12 rounded-xl bg-purple-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
               <TrendingUp className="w-6 h-6" />
             </div>
             <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">
@@ -69,8 +69,8 @@ export const StudentProgressSection: React.FC<StudentProgressSectionProps> = ({ 
             </ul>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-amber-300 transition-all shadow-sm">
-            <div className="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center mb-4 shadow-sm">
+          <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-amber-300 transition-all shadow-sm interactive-card card-hover-glow group">
+            <div className="w-12 h-12 rounded-xl bg-amber-600 text-white flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
               <Calendar className="w-6 h-6" />
             </div>
             <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">

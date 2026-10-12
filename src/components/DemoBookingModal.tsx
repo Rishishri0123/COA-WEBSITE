@@ -60,35 +60,44 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden relative">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white p-5 sm:p-6 relative">
+    <div 
+      className="fixed inset-0 z-[9995] flex items-center justify-center p-2.5 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-200"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div 
+        className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 relative my-auto max-h-[92dvh] sm:max-h-[88dvh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header - Fixed & Sticky, never gets cut off */}
+        <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white p-4 sm:p-5 relative shrink-0 shadow-md">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition cursor-pointer"
+            className="absolute top-3.5 right-3.5 p-2 rounded-xl bg-white/10 hover:bg-red-600/90 text-white transition-all cursor-pointer border border-white/20 active:scale-90"
             aria-label="Close dialog"
+            title="Close dialog"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 stroke-[2.5]" />
           </button>
 
           <div className="flex items-center space-x-2 text-amber-300 text-xs font-bold uppercase tracking-wider mb-1">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 animate-spin-slow" />
             <span>2-Day Free Trial Session</span>
           </div>
-          <h3 className="font-heading font-extrabold text-xl sm:text-2xl text-white">
+          <h3 className="font-heading font-extrabold text-lg sm:text-xl text-white">
             Book Your Free Trial Class
           </h3>
-          <p className="text-xs text-slate-300 mt-1">
-            Attend actual ongoing lectures and evaluate our faculty before finalizing enrollment.
+          <p className="text-xs text-slate-300 mt-0.5 leading-snug">
+            Attend live ongoing lectures & evaluate our senior faculty before enrolling.
           </p>
-          <div className="mt-2 text-[11px] text-amber-200 bg-white/10 rounded-lg px-2.5 py-1 inline-flex items-center gap-1.5 border border-white/15">
-            <span className="font-semibold">Visiting Hours:</span> 4:00 PM – 7:30 PM (Mon–Sat) • <span className="text-amber-300">Sunday Classes held during exam periods</span>
+          <div className="mt-2 text-[10px] sm:text-[11px] text-amber-200 bg-white/10 rounded-lg px-2.5 py-1 inline-flex items-center gap-1.5 border border-white/15">
+            <span className="font-semibold text-amber-300">Visiting Hours:</span> 4:00 PM – 7:30 PM (Mon–Sat) • <span className="text-slate-200">Sunday revision during exams</span>
           </div>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        {/* Scrollable Form Body - Guarantees full scrollability on mobile and desktop */}
+        <form onSubmit={handleSubmit} className="overflow-y-auto flex-1 overscroll-contain p-4 sm:p-6 space-y-4">
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1">
               Student Full Name *
@@ -99,7 +108,7 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Priyanshu Sharma"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50"
             />
           </div>
 
@@ -114,7 +123,7 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="10-digit mobile number"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-slate-50/50"
             />
           </div>
 
@@ -156,114 +165,162 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
             </div>
           </div>
 
-          {/* Custom Subject Selection with Dropdown + Checkboxes */}
+          {/* Custom Subject Selection with Dedicated Scrollable Area */}
           {course === 'Custom Combination of Individual Subjects' && (
-            <div className="p-3.5 bg-sky-50/90 border border-sky-300 rounded-xl space-y-2.5 text-xs animate-in fade-in duration-150">
-              <div className="flex items-center justify-between pb-1 border-b border-sky-200">
-                <span className="font-extrabold text-sky-950 uppercase tracking-wide">
-                  Custom Subject Selection
-                </span>
-                <span className="text-[11px] font-bold text-sky-800 bg-sky-200/80 px-2 py-0.5 rounded-full">
+            <div className="p-3.5 sm:p-4 bg-sky-50/90 border-2 border-sky-300 rounded-2xl space-y-3 text-xs animate-in fade-in duration-150 shadow-inner">
+              <div className="flex items-center justify-between pb-1.5 border-b border-sky-200">
+                <div>
+                  <span className="font-extrabold text-sky-950 uppercase tracking-wide text-xs block">
+                    Custom Subject Selection
+                  </span>
+                  <span className="text-[11px] text-sky-700">
+                    Choose individual subjects taught by senior HODs
+                  </span>
+                </div>
+                <span className="text-[11px] font-bold text-sky-900 bg-sky-200 px-2.5 py-0.5 rounded-full shrink-0">
                   {customSubjects.length} Selected
                 </span>
               </div>
 
-              {/* Dropdown to select custom subject */}
+              {/* Quick Preset Buttons */}
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCustomSubjects([
+                      'Physics - Mr. Arvind Kashyap',
+                      'Chemistry - Mr. Mukesh Saraswat',
+                      'Mathematics - Mr. Shiv Shankar Sharma'
+                    ]);
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-[11px] font-bold transition cursor-pointer"
+                >
+                  + All Science (Phy + Chem + Maths)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCustomSubjects([
+                      'Commerce & Accounts - Mr. Ravi Yadav',
+                      'Economics & Business Studies - Mr. Ravi Yadav'
+                    ]);
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-bold transition cursor-pointer"
+                >
+                  + Commerce Stream
+                </button>
+                {customSubjects.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setCustomSubjects([])}
+                    className="px-2 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-[11px] font-bold transition cursor-pointer ml-auto"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+
+              {/* Dropdown Selector */}
               <div>
                 <label className="block text-[11px] font-bold text-sky-950 mb-1">
-                  Select Custom Subject from Dropdown:
+                  Add from Dropdown:
                 </label>
                 <select
                   defaultValue=""
                   onChange={(e) => {
                     const val = e.target.value;
                     if (!val) return;
-                    if (val === 'ALL_SCIENCE') {
-                      setCustomSubjects(Array.from(new Set([
-                        ...customSubjects,
-                        'Physics - Mr. Arvind Kashyap',
-                        'Chemistry - Mr. Mukesh Saraswat',
-                        'Mathematics - Mr. Shiv Shankar Sharma'
-                      ])));
-                    } else if (val === 'CLEAR') {
-                      setCustomSubjects([]);
-                    } else if (!customSubjects.includes(val)) {
+                    if (!customSubjects.includes(val)) {
                       setCustomSubjects(prev => [...prev, val]);
                     }
                     e.target.value = '';
                   }}
-                  className="w-full px-2.5 py-2 rounded-lg border border-sky-300 text-xs bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full px-3 py-2 rounded-xl border border-sky-300 text-xs bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 font-medium"
                 >
-                  <option value="" disabled>-- Click Dropdown to Select Subject --</option>
-                  <optgroup label="Add Individual Subject">
-                    {CUSTOM_SUBJECTS_LIST.map((item) => (
-                      <option key={item.id} value={`${item.subject} - ${item.teacher}`}>
-                        + Add {item.subject} ({item.teacher})
-                      </option>
-                    ))}
-                  </optgroup>
-                  <optgroup label="Combos">
-                    <option value="ALL_SCIENCE">+ Add All 3 (Physics + Chemistry + Maths)</option>
-                  </optgroup>
-                  {customSubjects.length > 0 && (
-                    <optgroup label="Reset">
-                      <option value="CLEAR">✕ Clear All</option>
-                    </optgroup>
-                  )}
+                  <option value="" disabled>-- Select a subject to add --</option>
+                  {CUSTOM_SUBJECTS_LIST.map((item) => (
+                    <option key={item.id} value={`${item.subject} - ${item.teacher}`}>
+                      + {item.subject} ({item.teacher})
+                    </option>
+                  ))}
                 </select>
               </div>
 
-              {/* Tags */}
-              {customSubjects.length > 0 && (
-                <div className="flex flex-wrap gap-1">
+              {/* Selected Subject Chips */}
+              {customSubjects.length > 0 ? (
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {customSubjects.map((sub, i) => (
                     <span
                       key={i}
-                      className="inline-flex items-center text-[11px] font-semibold bg-white border border-sky-200 text-sky-900 px-2 py-0.5 rounded-md"
+                      className="inline-flex items-center text-[11px] font-semibold bg-white border border-sky-300 text-sky-950 px-2.5 py-1 rounded-lg shadow-xs"
                     >
                       <span>{sub}</span>
                       <button
                         type="button"
                         onClick={() => setCustomSubjects(prev => prev.filter(s => s !== sub))}
-                        className="ml-1 text-sky-400 hover:text-red-600 font-bold"
+                        className="ml-1.5 text-sky-500 hover:text-red-600 font-extrabold text-xs cursor-pointer p-0.5"
+                        title="Remove subject"
                       >
                         ✕
                       </button>
                     </span>
                   ))}
                 </div>
+              ) : (
+                <p className="text-[11px] text-amber-800 bg-amber-100/80 px-2.5 py-1.5 rounded-lg border border-amber-300 font-medium">
+                  Please select at least one subject below.
+                </p>
               )}
 
-              {/* Checkboxes */}
-              <div className="grid grid-cols-2 gap-1.5 pt-1">
-                {CUSTOM_SUBJECTS_LIST.map((item) => {
-                  const itemString = `${item.subject} - ${item.teacher}`;
-                  const isChecked = customSubjects.includes(itemString);
-                  return (
-                    <label
-                      key={item.id}
-                      className={`flex items-start space-x-1.5 p-1.5 rounded-lg border text-[11px] cursor-pointer transition select-none ${
-                        isChecked
-                          ? 'bg-white border-sky-500 text-sky-950 font-semibold shadow-2xs'
-                          : 'bg-white/80 border-slate-200 text-slate-700 hover:bg-white'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => {
-                          if (isChecked) {
-                            setCustomSubjects(prev => prev.filter(s => s !== itemString));
-                          } else {
-                            setCustomSubjects(prev => [...prev, itemString]);
-                          }
-                        }}
-                        className="w-3.5 h-3.5 text-sky-600 rounded border-slate-300 mt-0.5 cursor-pointer"
-                      />
-                      <span className="truncate">Checkbox - {item.subject} - {item.teacher}</span>
-                    </label>
-                  );
-                })}
+              {/* Clean, Fully Visible & Scrollable Checkboxes List */}
+              <div>
+                <span className="text-[11px] font-bold text-sky-950 block mb-1">
+                  Or select via Checkboxes:
+                </span>
+                <div className="max-h-56 sm:max-h-60 overflow-y-auto space-y-1.5 pr-1 overscroll-contain">
+                  {CUSTOM_SUBJECTS_LIST.map((item) => {
+                    const itemString = `${item.subject} - ${item.teacher}`;
+                    const isChecked = customSubjects.includes(itemString);
+                    return (
+                      <label
+                        key={item.id}
+                        className={`flex items-center justify-between p-2.5 rounded-xl border text-xs cursor-pointer transition select-none ${
+                          isChecked
+                            ? 'bg-white border-sky-500 text-sky-950 font-semibold shadow-xs ring-1 ring-sky-400'
+                            : 'bg-white/90 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-2.5 min-w-0 pr-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => {
+                              if (isChecked) {
+                                setCustomSubjects(prev => prev.filter(s => s !== itemString));
+                              } else {
+                                setCustomSubjects(prev => [...prev, itemString]);
+                              }
+                            }}
+                            className="w-4 h-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 cursor-pointer shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <span className="font-bold text-slate-900 block truncate">
+                              {item.subject}
+                            </span>
+                            <span className="text-[11px] text-slate-500 block truncate">
+                              Faculty: {item.teacher}
+                            </span>
+                          </div>
+                        </div>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                          isChecked ? 'bg-sky-100 text-sky-800' : 'bg-slate-100 text-slate-600'
+                        }`}>
+                          {isChecked ? 'Selected' : 'Add'}
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
@@ -281,24 +338,27 @@ export const DemoBookingModal: React.FC<DemoBookingModalProps> = ({
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-bold text-sm shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
-          >
-            <span>{isSubmitting ? 'Confirming Trial Class...' : 'Book Your Free Trial Class'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* Action Button */}
+          <div className="pt-2 space-y-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-sm shadow-lg shadow-red-950/20 transition-all flex items-center justify-center space-x-2 cursor-pointer btn-shimmer hover:scale-[1.01] active:scale-[0.99]"
+            >
+              <span>{isSubmitting ? 'Confirming Trial Class...' : 'Book Your Free Trial Class'}</span>
+              <ArrowRight className="w-4 h-4 animate-bounce-gentle" />
+            </button>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-100">
-            <span className="flex items-center">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 mr-1" />
-              100% Free Trial
-            </span>
-            <span className="flex items-center">
-              <Phone className="w-3 h-3 text-sky-600 mr-1" />
-              Instant SMS / WhatsApp confirmation
-            </span>
+            <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+              <span className="flex items-center">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 mr-1" />
+                100% Free Trial
+              </span>
+              <span className="flex items-center">
+                <Phone className="w-3 h-3 text-sky-600 mr-1" />
+                Instant SMS / WhatsApp confirmation
+              </span>
+            </div>
           </div>
         </form>
       </div>

@@ -21,6 +21,7 @@ import { AiChatbot } from './components/AiChatbot';
 import { DemoBookingModal } from './components/DemoBookingModal';
 import { SuccessModal } from './components/SuccessModal';
 import { AdminPortal } from './components/AdminPortal';
+import { ScrollRevealSection } from './components/ScrollRevealSection';
 
 export default function App() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -131,29 +132,71 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col selection:bg-sky-600 selection:text-white">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans flex flex-col selection:bg-sky-600 selection:text-white transition-colors duration-200">
       {/* Top Navigation - Completely hidden from admin portal links */}
       <Navbar
         onOpenDemoModal={handleOpenDemoModal}
       />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections with Scroll-Triggered Animations */}
       <main className="flex-1">
         <Hero onSuccessSubmit={handleSuccessSubmit} />
-        <AboutSection />
-        <SubjectWiseSection onSelectSubjectForDemo={handleOpenDemoModal} />
-        <BatchPlannerCalculator onOpenDemoModal={handleOpenDemoModal} />
-        <CoursesSection onSelectCourseForDemo={handleOpenDemoModal} />
-        <FacultySection onOpenConsultationModal={handleOpenDemoModal} />
-        <BestCoachingSeoSection onOpenDemoModal={() => handleOpenDemoModal()} />
-        <TestimonialsSection />
-        <CampusTourSection />
-        <GallerySection onOpenDemoModal={handleOpenDemoModal} />
-        <WhyUsSection />
-        <StudentProgressSection onOpenDemoModal={() => handleOpenDemoModal()} />
-        <GoogleMapsSection />
-        <ContactSection onSuccessSubmit={handleSuccessSubmit} prefilledCourse={selectedCourseForModal} />
-        <FaqSection />
+
+        <ScrollRevealSection>
+          <AboutSection />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <SubjectWiseSection onSelectSubjectForDemo={handleOpenDemoModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <BatchPlannerCalculator onOpenDemoModal={handleOpenDemoModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <CoursesSection onSelectCourseForDemo={handleOpenDemoModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <FacultySection onOpenConsultationModal={handleOpenDemoModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <BestCoachingSeoSection onOpenDemoModal={() => handleOpenDemoModal()} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <TestimonialsSection />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <CampusTourSection />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <GallerySection onOpenDemoModal={handleOpenDemoModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <WhyUsSection />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <StudentProgressSection onOpenDemoModal={() => handleOpenDemoModal()} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <GoogleMapsSection />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <ContactSection onSuccessSubmit={handleSuccessSubmit} prefilledCourse={selectedCourseForModal} />
+        </ScrollRevealSection>
+
+        <ScrollRevealSection>
+          <FaqSection />
+        </ScrollRevealSection>
       </main>
 
       {/* Footer - No visible admin portal buttons */}

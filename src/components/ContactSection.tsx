@@ -479,9 +479,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                                 }}
                                 className="w-4 h-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 mt-0.5 cursor-pointer"
                               />
-                              <span className="text-slate-800 leading-tight">
-                                Checkbox - {item.subject} - {item.teacher}
-                              </span>
+                              <div className="min-w-0">
+                                <span className="font-bold text-slate-900 block truncate">
+                                  {item.subject}
+                                </span>
+                                <span className="text-[11px] text-slate-500 block truncate">
+                                  Faculty: {item.teacher}
+                                </span>
+                              </div>
                             </label>
                           );
                         })}
@@ -513,7 +518,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onSuccessSubmit,
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-md transition flex items-center justify-center space-x-2 cursor-pointer btn-shimmer hover:scale-[1.02] active:scale-[0.98]"
                     title="Submit Form to Get Teacher Contacts"
                   >
                     <span>{isSubmitting ? 'Submitting Inquiry...' : 'Submit & Receive Teacher Phone Numbers'}</span>

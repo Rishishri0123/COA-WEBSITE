@@ -22,18 +22,18 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
   ];
 
   return (
-    <section id="courses" className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <section id="courses" className="py-16 sm:py-24 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-sky-700 font-extrabold text-xs uppercase tracking-widest bg-sky-100/70 border border-sky-200 px-3.5 py-1.5 rounded-full inline-flex items-center">
+          <span className="text-sky-700 dark:text-sky-300 font-extrabold text-xs uppercase tracking-widest bg-sky-100/70 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800 px-3.5 py-1.5 rounded-full inline-flex items-center">
             <BookOpen className="w-3.5 h-3.5 mr-1.5" />
             Curriculum & Programs
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3 tracking-tight">
             Academic Programs Engineered for High Scores
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-2">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-2">
             Structured syllabi, 2–3 monthly progress tests to monitor student performance, NCERT line-by-line mastery, and entrance exam techniques across our Ghaziabad campus centers.
           </p>
         </div>
@@ -49,11 +49,11 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
                 onClick={() => setActiveCategory(cat.id as any)}
                 className={`inline-flex items-center px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-105'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shadow-sm'
+                    ? 'bg-slate-900 dark:bg-sky-600 text-white shadow-md shadow-slate-900/20 scale-105'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 shadow-sm'
                 }`}
               >
-                <Icon className={`w-4 h-4 mr-2 ${isActive ? 'text-amber-400' : 'text-slate-500'}`} />
+                <Icon className={`w-4 h-4 mr-2 ${isActive ? 'text-amber-400' : 'text-slate-500 dark:text-slate-400'}`} />
                 <span>{cat.label}</span>
               </button>
             );
@@ -67,40 +67,40 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
             return (
               <div
                 key={course.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-slate-200/80 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+                className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 shadow-sm border border-slate-200/80 dark:border-slate-800 interactive-card card-hover-glow hover:border-sky-300 dark:hover:border-sky-500 flex flex-col justify-between group relative overflow-hidden transition-colors"
               >
                 {/* Popular Highlight Badge */}
                 {isPopular && (
-                  <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-bl-xl shadow-sm">
+                  <div className="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-bl-xl shadow-sm animate-pulse-soft">
                     High Demand Batch
                   </div>
                 )}
 
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-extrabold text-sky-800 bg-sky-50 border border-sky-200 px-3 py-1 rounded-full">
+                    <span className="text-xs font-extrabold text-sky-800 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 px-3 py-1 rounded-full">
                       {course.grade}
                     </span>
                   </div>
 
-                  <h3 className="font-heading text-xl font-bold text-slate-900 group-hover:text-sky-700 transition leading-snug">
+                  <h3 className="font-heading text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition leading-snug">
                     {course.title}
                   </h3>
 
-                  <p className="text-slate-600 text-xs sm:text-sm mt-2 mb-4 leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm mt-2 mb-4 leading-relaxed">
                     {course.description}
                   </p>
 
                   {/* Subjects covered */}
                   <div className="mb-4">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 block mb-1.5">
+                    <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
                       Subjects Covered:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {course.subjects.map((sub, idx) => (
                         <span
                           key={idx}
-                          className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-lg border border-slate-200/60"
+                          className="text-[11px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-lg border border-slate-200/60 dark:border-slate-700"
                         >
                           {sub}
                         </span>
@@ -110,13 +110,13 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
 
                   {/* Key Features */}
                   <div className="space-y-2 mb-6">
-                    <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 block mb-1.5">
+                    <span className="text-[11px] uppercase font-bold tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
                       Key Program Features:
                     </span>
-                    <ul className="space-y-1.5 text-xs text-slate-700">
+                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                       {course.features.map((feat, i) => (
                         <li key={i} className="flex items-start">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 mr-2 shrink-0 mt-0.5" />
+                          <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 mr-2 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -125,14 +125,14 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
                 </div>
 
                 {/* Card Footer with Teacher Guidance and Form Action */}
-                <div className="pt-4 border-t border-slate-100 space-y-3">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
                   <div className="flex items-center justify-between text-xs">
                     <div>
                       <span className="text-[10px] text-slate-400 block font-medium">Head Faculty:</span>
-                      <span className="font-bold text-slate-800 text-[11px]">{course.facultyInCharge}</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">{course.facultyInCharge}</span>
                     </div>
-                    <span className="text-[10px] bg-sky-50 text-sky-800 font-bold px-2 py-0.5 rounded-md border border-sky-200 flex items-center">
-                      <Lock className="w-2.5 h-2.5 mr-1 text-sky-600" />
+                    <span className="text-[10px] bg-sky-50 dark:bg-slate-800 text-sky-800 dark:text-sky-300 font-bold px-2 py-0.5 rounded-md border border-sky-200 dark:border-slate-700 flex items-center">
+                      <Lock className="w-2.5 h-2.5 mr-1 text-sky-600 dark:text-sky-400" />
                       Phone via Form
                     </span>
                   </div>
@@ -140,7 +140,7 @@ export const CoursesSection: React.FC<CoursesSectionProps> = ({ onSelectCourseFo
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <button
                       onClick={() => onSelectCourseForDemo(course.title)}
-                      className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition flex items-center justify-center space-x-1 cursor-pointer"
+                      className="w-full py-2.5 rounded-xl bg-slate-900 dark:bg-sky-600 hover:bg-slate-800 dark:hover:bg-sky-500 text-white font-bold text-xs transition flex items-center justify-center space-x-1 cursor-pointer"
                       title="Book Your Free Trial Class"
                     >
                       <span>Book Free Trial</span>
